@@ -28,4 +28,4 @@ How to install:
 ![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/configured.png)
 
 
-Friendly names configured in your Home Assistant config are used to show the objects on the Toon. So make sure all items you want Toon to show have a friendly name. All objects are refreshed upon opening the app, pressing the "Opslaan" button on the configuration screen and pressing the icon on the app home screen (top right). I'm not a fan of endless loops so I haven't created an automatic update function.
+Friendly names configured in your Home Assistant config are used to show the objects on the Toon. So make sure all items you want Toon to show have a friendly name. All objects are refreshed upon opening the app, pressing the "Opslaan" button on the configuration screen and pressing the Home Assistant image on the app home screen (top right). I'm not a fan of endless loops so I haven't created an automatic update function.
