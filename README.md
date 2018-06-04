@@ -19,3 +19,10 @@ How to install:
 3. Run command "killall qt-gui" to restart Toons user interface
 4. Add the app called "homeAssistant" to a new tile
 5. When starting the app for the first time the screen will be pretty much empty, click on "Instellingen" to configure the app
+6. On the configuration page enter the Home Assistant connection info and entity_id's you want to be shown (press the left/right arrows to scroll through sensors/scenes/switches)
+
+![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/configuration.png)
+
+7. Press "Opslaan" to save your configuration. If all is well the information will be retrieved from your Home Assistant system
+
+![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/configured.png)
