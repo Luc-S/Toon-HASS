@@ -157,7 +157,6 @@ Screen {
 		addCustomTopRightButton("Opslaan");
 		homeAssistantServerLabel.inputText = app.homeAssistantServer;
         homeAssistantPortLabel.inputText = app.homeAssistantPort;
-        homeAssistantPassLabel.inputText = app.homeAssistantPass;
         homeAssistantSensor1Label.inputText = app.homeAssistantSensor1;
         homeAssistantSensor2Label.inputText = app.homeAssistantSensor2;
         homeAssistantSensor3Label.inputText = app.homeAssistantSensor3;
