@@ -155,7 +155,7 @@ Screen {
                 left: parent.left
                 topMargin: 15
                 leftMargin: 30
-            } 
+            }
 
             Text {
                 id: homeAssistantSensor1Name
@@ -213,26 +213,26 @@ Screen {
 
             Text {
                 id: homeAssistantSensor1Value;
-                text: JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']                                                    
+                text: JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
                 anchors {
-                        top: sensorRect2.top  
-                        right: sensorRect2.right
-                        rightMargin: 20
+                    top: sensorRect2.top  
+                    right: sensorRect2.right
+                    rightMargin: 20
                 }
             } 
 
             Text {
                 id: homeAssistantSensor2Value;
-                text: JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state'] 
-                font.pixelSize: 12                                            
+                text: JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state']
+                font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap 
                 anchors {
-                        top: homeAssistantSensor1Value.bottom
-                        right: homeAssistantSensor1Value.right
+                    top: homeAssistantSensor1Value.bottom
+                    right: homeAssistantSensor1Value.right
                 }
             }
 
@@ -243,20 +243,20 @@ Screen {
                 color: "Black" 
                 wrapMode: Text.WordWrap
                 anchors {
-                        top: homeAssistantSensor2Value.bottom  
-                        right: homeAssistantSensor2Value.right                                            
+                    top: homeAssistantSensor2Value.bottom  
+                    right: homeAssistantSensor2Value.right
                 }
             }
 
             Text {
                 id: homeAssistantSensor4Value;
-                text: JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor4Info)['state'] + " " + JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor4Info)['state']                                                     
+                text: JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor4Info)['state'] + " " + JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor4Info)['state']
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
                 anchors {
-                        top: homeAssistantSensor3Value.bottom  
-                        right: homeAssistantSensor3Value.right                                            
+                    top: homeAssistantSensor3Value.bottom
+                    right: homeAssistantSensor3Value.right
                 }
             }
         }
@@ -324,7 +324,7 @@ Screen {
             anchors {
                 top: sensorRect3.top
                 left: sensorRect3.right
-            } 
+            }
 
             Text {
                 id: homeAssistantSensor5Value;
@@ -337,7 +337,7 @@ Screen {
                     right: sensorRect4.right
                     rightMargin: 20
                 }
-            } 
+            }
 
             Text {
                 id: homeAssistantSensor6Value;
@@ -397,7 +397,7 @@ Screen {
             top: sceneTitle.bottom
             left: sceneTitle.left
             topMargin: 10
-        } 
+        }
         width: 245
         height: 235
         color: "transparent"
@@ -528,10 +528,10 @@ Screen {
         width: 250
         color: "transparent"
         anchors {
-                top: switchTitle.bottom
-                left: switchTitle.left
-                topMargin: 5
-        } 
+            top: switchTitle.bottom
+            left: switchTitle.left
+            topMargin: 5
+        }
 
         Text {
             id: homeAssistantSwitch1Name
@@ -541,8 +541,8 @@ Screen {
             color: "Black" 
             wrapMode: Text.WordWrap
             anchors {
-                    top: parent.top
-                    topMargin: 13
+                top: parent.top
+                topMargin: 13
             }
         }
 
