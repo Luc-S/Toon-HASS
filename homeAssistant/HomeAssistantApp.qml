@@ -176,12 +176,12 @@ App {
             "Port" : homeAssistantPort,
             "Pass" : homeAssistantPass,
         }
-           var doc2 = new XMLHttpRequest();
+        var doc2 = new XMLHttpRequest();
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/userSettings.json");
-           doc2.send(JSON.stringify(homeAssistantSettingsJson));
-           
-           url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
-        
+        doc2.send(JSON.stringify(homeAssistantSettingsJson));
+
+        url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
+
         if (homeAssistantPass) {
             urlPass = "?api_password=" + homeAssistantPass;
         }
