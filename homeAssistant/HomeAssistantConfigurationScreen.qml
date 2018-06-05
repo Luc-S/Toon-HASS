@@ -392,7 +392,7 @@ Screen {
             height: 35
             leftTextAvailableWidth: 50
             leftText: "8:"
-            anchors {      
+            anchors {
                 top: homeAssistantSensor7Label.bottom
                 left: homeAssistantSensor7Label.left
                 topMargin: 6
@@ -432,16 +432,16 @@ Screen {
         }
 
         Image {
-                id: navPageImage1
-                width: 100
-                height: 28
-                source: "./drawables/page1.png"
-                smooth: true
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: 10
-                }
+            id: navPageImage1
+            width: 100
+            height: 28
+            source: "./drawables/page1.png"
+            smooth: true
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
+                bottomMargin: 10
+            }
         }
 
         Rectangle {
@@ -525,6 +525,7 @@ Screen {
                 top: homeAssistantScene1Label.bottom
                 left: homeAssistantScene1Label.left
                 topMargin: 6
+            }
 
             onClicked: {
                 qkeyboard.open("Voer het entity_id in van de scene voor knop 2", homeAssistantScene2Label.inputText, saveHomeAssistantScene2)
@@ -630,16 +631,16 @@ Screen {
         }
 
         Image {
-                id: navPageImage2
-                width: 100
-                height: 28
-                source: "./drawables/page2.png"
-                smooth: true
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: 10
-                }
+            id: navPageImage2
+            width: 100
+            height: 28
+            source: "./drawables/page2.png"
+            smooth: true
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
+                bottomMargin: 10
+            }
         }
 
         Rectangle {
@@ -706,6 +707,7 @@ Screen {
                 left: page3Title.left
                 topMargin: 10
             }
+
             onClicked: {
                 qkeyboard.open("Voer het entity_id in voor schakelaar 1", homeAssistantSwitch1Label.inputText, saveHomeAssistantSwitch1)
             }
@@ -722,6 +724,7 @@ Screen {
                 left: homeAssistantSwitch1Label.left
                 topMargin: 6
             }
+            
             onClicked: {
                 qkeyboard.open("Voer het entity_id in voor schakelaar 2", homeAssistantSwitch2Label.inputText, saveHomeAssistantSwitch2)
             }
