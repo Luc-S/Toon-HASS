@@ -7,9 +7,6 @@ import FileIO 1.0
 App {
 	id: homeAssistantApp
 
-	// These are the URL's for the QML resources from which our widgets will be instantiated.
-	// By making them a URL type property they will automatically be converted to full paths,
-	// preventing problems when passing them around to code that comes from a different path.
 	property url tileUrl : "HomeAssistantTile.qml";
 	property url thumbnailIcon: "drawables/homeAssistant.png";
 
@@ -171,7 +168,6 @@ App {
         id: switchInfoFile                                  
         source: "./switchInfo.json"                       
     }
-
 
 //Store Home Assistant connection settings
 	function saveHomeAssistantSettingsJson() {

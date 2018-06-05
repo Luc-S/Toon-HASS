@@ -5,11 +5,9 @@ import qb.components 1.0
 Tile {
 	id: homeAssistantTile
 
-	/// Will be called when widget instantiated
 	function init() {}
 
 	onClicked: {
-	//	stage.openFullscreen(app.fullScreenUrl);
 		if (app.homeAssistantScreen)
 			app.homeAssistantScreen.show();
 	}

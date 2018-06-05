@@ -245,6 +245,7 @@ Screen {
         }
     }
     
+
 //Sensor settings textboxes
 
     Rectangle {
