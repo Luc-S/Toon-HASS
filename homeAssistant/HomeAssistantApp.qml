@@ -499,6 +499,7 @@ App {
                     return error;
                 }
             }
+            getSwitchInfo();
         }
 
         http.open("POST", fullUrl, true);

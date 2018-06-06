@@ -565,7 +565,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch1Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch1, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -611,7 +610,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch2Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch2, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -656,7 +654,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch3Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch3, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -701,7 +698,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch4Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch4, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -746,7 +742,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch5, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
