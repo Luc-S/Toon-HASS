@@ -987,5 +987,30 @@ Screen {
             }
         }
     }
+
+    // Alarm section
+    // Text {
+    //     id: alarmTitle
+    //     x: 570
+    //     y: 140
+    //     width: 125
+    //     text: "Alarm"
+    //     font.pixelSize: 16
+    //     font.family: qfont.semiBold.name
+    //     color: "Black"
+    //     wrapMode: Text.WordWrap
+    // }
+
+    // Rectangle {
+    //     id: alarmRect
+    //     anchors {
+    //         top: alarmTitle.bottom
+    //         left: alarmTitle.left
+    //         topMargin: 10
+    //     }
+    //     width: 200
+    //     height: 235
+    //     color: "white"
+    // }
 }
 
