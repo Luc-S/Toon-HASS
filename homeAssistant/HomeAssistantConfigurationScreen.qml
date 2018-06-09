@@ -96,16 +96,10 @@ Screen {
         homeAssistantScene4Label.inputText = app.homeAssistantScene4;
     }
 
-    //Function to store entity_id of fifth scene to application variable
-    function saveHomeAssistantScene5(text) {
-        app.homeAssistantScene5 = text;
-        homeAssistantScene5Label.inputText = app.homeAssistantScene5;
-    }
-
-    //Function to store entity_id of sixth scene to application variable
-    function saveHomeAssistantScene6(text) {
-        app.homeAssistantScene6 = text;
-        homeAssistantScene6Label.inputText = app.homeAssistantScene6;
+    //Function to store entity_id of first slider to application variable
+    function saveHomeAssistantSlider1(text) {
+        app.homeAssistantSlider1 = text;
+        homeAssistantSlider1Label.inputText = app.homeAssistantSlider1;
     }
 
     //Function to store entity_id of first switch to application variable
@@ -157,6 +151,7 @@ Screen {
         addCustomTopRightButton("Opslaan");
         homeAssistantServerLabel.inputText = app.homeAssistantServer;
         homeAssistantPortLabel.inputText = app.homeAssistantPort;
+        homeAssistantPassLabel.inputText = "*****";
         homeAssistantSensor1Label.inputText = app.homeAssistantSensor1;
         homeAssistantSensor2Label.inputText = app.homeAssistantSensor2;
         homeAssistantSensor3Label.inputText = app.homeAssistantSensor3;
@@ -169,8 +164,7 @@ Screen {
         homeAssistantScene2Label.inputText = app.homeAssistantScene2; 
         homeAssistantScene3Label.inputText = app.homeAssistantScene3; 
         homeAssistantScene4Label.inputText = app.homeAssistantScene4;
-        homeAssistantScene5Label.inputText = app.homeAssistantScene5;
-        homeAssistantScene6Label.inputText = app.homeAssistantScene6;
+        homeAssistantSlider1Label.inputText = app.homeAssistantSlider1;
         homeAssistantSwitch1Label.inputText = app.homeAssistantSwitch1;
         homeAssistantSwitch2Label.inputText = app.homeAssistantSwitch2;
         homeAssistantSwitch3Label.inputText = app.homeAssistantSwitch3;
@@ -474,7 +468,7 @@ Screen {
     }
 
 
-    //Scene settings textboxes
+    //Scene & slider settings textboxes
     Rectangle {
         id: gridScenes
         anchors.top: grid1.bottom
@@ -568,37 +562,31 @@ Screen {
             }
         }
 
+        Text {
+            id: page2Title2
+            x: 335
+            y: 10
+            width: 120
+            text: "Slider"
+            font.pixelSize: 14
+            font.family: qfont.semiBold.name
+            color: "Black"
+            wrapMode: Text.WordWrap
+        }
+
         EditTextLabel4421 {
-            id: homeAssistantScene5Label
+            id: homeAssistantSlider1Label
             width: 295
             height: 35
             leftTextAvailableWidth: 50
-            leftText: "5:"
+            leftText: "1:"
             anchors {
                 top: homeAssistantScene1Label.top
                 left: homeAssistantScene1Label.right
                 leftMargin: 20
             }
-
             onClicked: {
-                qkeyboard.open("Voer het entity_id in van de scene voor knop 5", homeAssistantScene5Label.inputText, saveHomeAssistantScene5)
-            }
-        }
-
-        EditTextLabel4421 {
-            id: homeAssistantScene6Label
-            width: 295
-            height: 35
-            leftTextAvailableWidth: 50
-            leftText: "6:"
-            anchors {
-                top: homeAssistantScene5Label.bottom
-                left: homeAssistantScene5Label.left
-                topMargin: 6
-            }
-
-            onClicked: {
-                qkeyboard.open("Voer het entity_id in van de scene voor knop 6", homeAssistantScene6Label.inputText, saveHomeAssistantScene6)
+                qkeyboard.open("Voer het entity_id in voor slider 1", homeAssistantSlider1Label.inputText, saveHomeAssistantSlider1)
             }
         }
 
@@ -850,5 +838,3 @@ Screen {
         }
     }
 }
-
-

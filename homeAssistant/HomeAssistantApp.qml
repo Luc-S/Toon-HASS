@@ -93,16 +93,12 @@ App {
     property string homeAssistantScene2 : ""
     property string homeAssistantScene3 : ""
     property string homeAssistantScene4 : ""
-    property string homeAssistantScene5 : ""
-    property string homeAssistantScene6 : ""
 
     property variant homeAssistantScenesJson : {
         'Scene1': "",
         'Scene2': "",
         'Scene3': "",
         'Scene4': "",
-        'Scene5': "",
-        'Scene6': "",
     }
 
     FileIO {
@@ -114,22 +110,47 @@ App {
     property variant homeAssistantScene2Info : []
     property variant homeAssistantScene3Info : []
     property variant homeAssistantScene4Info : []
-    property variant homeAssistantScene5Info : []
-    property variant homeAssistantScene6Info : []
 
     property variant homeAssistantSceneInfoJson : {
         'Scene1Info': "",
         'Scene2Info': "",
         'Scene3Info': "",
         'Scene4Info': "",
-        'Scene5Info': "",
-        'Scene6Info': "",
     }
 
     FileIO {
         id: sceneInfoFile
         source: "./sceneInfo.json"
-    } 
+    }
+
+    property int sliderBtnWidth : 0
+    property string homeAssistantSlider1 : ""
+    property real homeAssistantSlider1Max : 0.0
+    property real homeAssistantSlider1Min : 0.0
+    property real homeAssistantSlider1Step : 0.0
+    property int homeAssistantSlider1Options : 0
+    property string imgNotSelected : "./drawables/notSelected.png"
+    property string imgSelected : "./drawables/selected.png"
+
+    property variant homeAssistantSlidersJson : {
+        'Slider1': "",
+    }
+
+    FileIO {
+        id: slidersFile
+        source: "./sliders.json"
+    }
+
+    property variant homeAssistantSlider1Info : []
+
+    property variant homeAssistantSliderInfoJson : {
+        'Slider1Info': "",
+    }
+
+    FileIO {
+        id: sliderInfoFile
+        source: "./sliderInfo.json"
+    }
 
     property string homeAssistantSwitch1 : ""
     property string homeAssistantSwitch2 : ""
@@ -188,6 +209,7 @@ App {
 
         saveHomeAssistantSensorsJson();
         saveHomeAssistantScenesJson();
+        saveHomeAssistantSlidersJson();
         saveHomeAssistantSwitchesJson();
     }
 
@@ -270,8 +292,6 @@ App {
             "Scene2" : homeAssistantScene2,
             "Scene3" : homeAssistantScene3,
             "Scene4" : homeAssistantScene4,
-            "Scene5" : homeAssistantScene5,
-            "Scene6" : homeAssistantScene6,
         }
         var doc2 = new XMLHttpRequest();
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/scenes.json");
@@ -288,20 +308,12 @@ App {
 
                     getHomeAssistant(homeAssistantScene4, function(data) {
                         homeAssistantScene4Info = data;
-                        
-                        getHomeAssistant(homeAssistantScene5, function(data) {
-                            homeAssistantScene5Info = data;
-                            
-                            getHomeAssistant(homeAssistantScene6, function(data) {
-                                homeAssistantScene6Info = data;
-                                saveHomeAssistantSceneInfoJson();
-                            });
-                        });
+                        saveHomeAssistantSceneInfoJson();
                     });
                 });
             });
         });
-    }  
+    }
 
     //Store scene information retrieved from Home Assistant
     function saveHomeAssistantSceneInfoJson() {
@@ -310,14 +322,38 @@ App {
             "Scene2Info" : homeAssistantScene2Info,
             "Scene3Info" : homeAssistantScene3Info,
             "Scene4Info" : homeAssistantScene4Info,
-            "Scene5Info" : homeAssistantScene5Info,
-            "Scene6Info" : homeAssistantScene6Info,
         }
         var doc2 = new XMLHttpRequest();
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sceneInfo.json");
         doc2.send(JSON.stringify(homeAssistantSceneInfoJson));
     }
 
+    //Store slider settings
+    function saveHomeAssistantSlidersJson() {
+        var homeAssistantSlidersJson = {
+            "Slider1" : homeAssistantSlider1,
+        }
+        var doc2 = new XMLHttpRequest();
+        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliders.json");
+        doc2.send(JSON.stringify(homeAssistantScenesJson));
+    }
+
+    function getSliderInfo() {
+        getHomeAssistant(homeAssistantSlider1, function(data) {
+            homeAssistantSlider1Info = data;
+            saveHomeAssistantSliderInfoJson();
+        });
+    }
+
+    //Store slider information retrieved from Home Assistant
+    function saveHomeAssistantSliderInfoJson() {
+        var homeAssistantSliderInfoJson = {
+            "Slider1Info" : homeAssistantSlider1Info,
+        }
+        var doc2 = new XMLHttpRequest();
+        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliderInfo.json");
+        doc2.send(JSON.stringify(homeAssistantSliderInfoJson));
+    }
 
     //Store switch settings
     function saveHomeAssistantSwitchesJson() {
@@ -331,8 +367,6 @@ App {
         var doc2 = new XMLHttpRequest();
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switches.json");
         doc2.send(JSON.stringify(homeAssistantSwitchesJson));
-        
-        getSwitchInfo();
     }
 
     //Retrieve switch information from Home Assistant
@@ -392,6 +426,8 @@ App {
         homeAssistantSwitchInfoJson = JSON.parse(switchInfoFile.read());
         homeAssistantSensorsJson = JSON.parse(sensorFile.read());
         homeAssistantSensorInfoJson = JSON.parse(sensorInfoFile.read());
+        homeAssistantSlidersJson = JSON.parse(slidersFile.read());
+        homeAssistantSliderInfoJson = JSON.parse(sliderInfoFile.read());
 
         homeAssistantServer = homeAssistantSettingsJson ['Server'];
         homeAssistantPort = homeAssistantSettingsJson ['Port'];
@@ -407,15 +443,22 @@ App {
         homeAssistantScene2 = homeAssistantScenesJson ['Scene2'];
         homeAssistantScene3 = homeAssistantScenesJson ['Scene3'];
         homeAssistantScene4 = homeAssistantScenesJson ['Scene4'];
-        homeAssistantScene5 = homeAssistantScenesJson ['Scene5'];
-        homeAssistantScene6 = homeAssistantScenesJson ['Scene6'];
 
         homeAssistantScene1Info = homeAssistantSceneInfoJson ['Scene1Info'];
         homeAssistantScene2Info = homeAssistantSceneInfoJson ['Scene2Info'];
         homeAssistantScene3Info = homeAssistantSceneInfoJson ['Scene3Info'];
         homeAssistantScene4Info = homeAssistantSceneInfoJson ['Scene4Info'];
-        homeAssistantScene5Info = homeAssistantSceneInfoJson ['Scene5Info'];
-        homeAssistantScene6Info = homeAssistantSceneInfoJson ['Scene6Info'];
+
+        homeAssistantSlider1 = homeAssistantSlidersJson ['Slider1'];
+        homeAssistantSlider1Info = homeAssistantSliderInfoJson ['Slider1Info'];
+
+        if (homeAssistantSlider1Info) {
+            homeAssistantSlider1Max = (JSON.parse(homeAssistantSlider1Info)['attributes']['max']).toFixed(1);
+            homeAssistantSlider1Min = (JSON.parse(homeAssistantSlider1Info)['attributes']['min']).toFixed(1);
+            homeAssistantSlider1Step = (JSON.parse(homeAssistantSlider1Info)['attributes']['step']).toFixed(1);
+
+            homeAssistantSlider1Options = Math.round(((homeAssistantSlider1Max - homeAssistantSlider1Min) / homeAssistantSlider1Step) + 1);
+        }
         
         homeAssistantSwitch1 = homeAssistantSwitchesJson ['Switch1'];
         homeAssistantSwitch2 = homeAssistantSwitchesJson ['Switch2'];
@@ -446,6 +489,7 @@ App {
         homeAssistantSensor6Info = homeAssistantSensorInfoJson ['Sensor6Info'];
         homeAssistantSensor7Info = homeAssistantSensorInfoJson ['Sensor7Info'];
         homeAssistantSensor8Info = homeAssistantSensorInfoJson ['Sensor8Info'];
+
     }
 
     function getHomeAssistant(entity, callback) {
@@ -486,11 +530,15 @@ App {
             case "switch":
                 fullUrl = state ? url + "/api/services/switch/turn_on" : url + "/api/services/switch/turn_off"
                 break;
+            case "slider":
+                params = '{"entity_id": "' + entity + '", "value":"' + state + '"}'// "{ “entity_id”: “input_number.pool_run_time”, “value”: “{{NumberField}}” }"
+                fullUrl = url + "/api/services/input_number/set_value";
+                break;
             default:
                 pass
         }
 
-        http.onreadystatechange = function() { // Call a function when the state changes.
+        http.onreadystatechange = function(type, entity) { // Call a function when the state changes.
             if (http.readyState == 4) {
                 if (http.status == 200) {
                     return true;
@@ -499,6 +547,8 @@ App {
                     return error;
                 }
             }
+            getSwitchInfo();
+            getSliderInfo();
         }
 
         http.open("POST", fullUrl, true);

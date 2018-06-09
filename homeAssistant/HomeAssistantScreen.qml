@@ -10,6 +10,7 @@ Screen {
 
         app.getSensorInfo();
         app.getSwitchInfo();
+        app.getSliderInfo();
 
         if (app.homeAssistantScene1) {
             homeAssistantScene1Button.height = 75;
@@ -18,6 +19,7 @@ Screen {
             homeAssistantScene1Button.visible = false;
             homeAssistantScene1Button.height = 0;
         }
+
         if (app.homeAssistantScene2) {
             homeAssistantScene2Button.height = 75;
             homeAssistantScene2Button.visible = true;
@@ -25,6 +27,7 @@ Screen {
             homeAssistantScene2Button.visible = false;
             homeAssistantScene2Button.height = 0;
         }
+
         if (app.homeAssistantScene3) {
             homeAssistantScene3Button.height = 75;
             homeAssistantScene3Button.visible = true;
@@ -32,6 +35,7 @@ Screen {
             homeAssistantScene3Button.visible = false;
             homeAssistantScene3Button.height = 0;
         }
+
         if (app.homeAssistantScene4) {
             homeAssistantScene4Button.height = 75;
             homeAssistantScene4Button.visible = true; 
@@ -40,20 +44,14 @@ Screen {
             homeAssistantScene4Button.height = 0;
         }
 
-        if (app.homeAssistantScene5) {
-            homeAssistantScene5Button.height = 75;
-            homeAssistantScene5Button.visible = true; 
-        } else {        
-            homeAssistantScene5Button.visible = false;
-            homeAssistantScene5Button.height = 0;
-        }
+        if (app.homeAssistantSlider1) {
+            sliderArea.visible = true;
 
-        if (app.homeAssistantScene6) {
-            homeAssistantScene6Button.height = 75;
-            homeAssistantScene6Button.visible = true; 
-        } else {        
-            homeAssistantScene6Button.visible = false;
-            homeAssistantScene6Button.height = 0;
+            if (app.homeAssistantSlider1Options > 0) {
+                app.sliderBtnWidth = Math.round(245 / app.homeAssistantSlider1Options);
+            }
+        } else {
+            sliderArea.visible = false;
         }
 
         if (app.homeAssistantSwitch1) {
@@ -109,7 +107,7 @@ Screen {
     Text {
         id: title
         x: 30
-        y: 5
+        y: 0
         width: 740
         text: app.message
         font.pixelSize: 10
@@ -122,7 +120,7 @@ Screen {
     Rectangle {
         id: sensorRect
         x: 30
-        y: 25
+        y: 15
         width: 740
         height: 100
         radius: 10
@@ -142,6 +140,7 @@ Screen {
                 onClicked: {
                     app.getSensorInfo();
                     app.getSwitchInfo();
+                    app.getSliderInfo();
                 }
             }
         }
@@ -377,12 +376,11 @@ Screen {
         }
     }
 
-
     //Scene section
     Text {
         id: sceneTitle
         x: 30
-        y: 140
+        y: 130
         width: 245
         text: "Scenes"
         font.pixelSize: 16
@@ -396,10 +394,10 @@ Screen {
         anchors {
             top: sceneTitle.bottom
             left: sceneTitle.left
-            topMargin: 10
+            topMargin: 5
         }
         width: 245
-        height: 235
+        height: 160
         color: "transparent"
 
         IconButton {
@@ -443,9 +441,9 @@ Screen {
             text: JSON.parse(app.homeAssistantScene3Info)['attributes']['friendly_name']
 
             anchors {
-                left: homeAssistantScene2Button.left
-                top: homeAssistantScene2Button.bottom
-                topMargin: 5
+                left: homeAssistantScene1Button.right
+                top: homeAssistantScene1Button.top
+                leftMargin: 5
             }
 
             bottomClickMargin: 3
@@ -461,9 +459,9 @@ Screen {
             text: JSON.parse(app.homeAssistantScene4Info)['attributes']['friendly_name']
  
             anchors {
-                left: homeAssistantScene1Button.right
-                top: homeAssistantScene1Button.top
-                leftMargin: 5
+                left: homeAssistantScene3Button.left
+                top: homeAssistantScene3Button.bottom
+                topMargin: 5
             }
 
             bottomClickMargin: 3
@@ -471,40 +469,283 @@ Screen {
                 app.setHomeAssistant("scene", app.homeAssistantScene4);
             }
         }
+    }
 
-        IconButton {
-            id: homeAssistantScene5Button
-            width: 120
-            height: 75
-            text: JSON.parse(app.homeAssistantScene5Info)['attributes']['friendly_name']
+    //Slider section
+    Rectangle {
+        id: sliderArea
+        width: 245
+        height: 85
+        color: "transparent"
+        anchors {
+            top: sceneRect.bottom
+            left: sceneRect.left
+            topMargin: 10
+        }
 
+        Text {
+            id: sliderTitle
+            width: 245
+            height: 27
+            text: JSON.parse(app.homeAssistantSlider1Info)['attributes']['friendly_name']
+            font.pixelSize: 16
+            font.family: qfont.semiBold.name
+            color: "Black"
+            wrapMode: Text.WordWrap
             anchors {
-                left: homeAssistantScene4Button.left
-                top: homeAssistantScene4Button.bottom
-                topMargin: 5
-            }
-
-            bottomClickMargin: 3
-            onClicked: {
-                app.setHomeAssistant("scene", app.homeAssistantScene5);
+                top: parent.top
+                left: parent.left
             }
         }
 
-        IconButton {
-            id: homeAssistantScene6Button
-            width: 120
-            height: 75
-            text: JSON.parse(app.homeAssistantScene6Info)['attributes']['friendly_name']
- 
+        Rectangle {
+            id: sliderRect
+            width: 245
+            height: 40
+            color: "transparent"
             anchors {
-                left: homeAssistantScene5Button.left
-                top: homeAssistantScene5Button.bottom
-                topMargin: 5
+                top: sliderTitle.bottom
+                left: parent.left
             }
 
-            bottomClickMargin: 3
-            onClicked: { 
-                app.setHomeAssistant("scene", app.homeAssistantScene6);
+            Rectangle {
+                id: sliderRect1
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: parent.left
+                }
+
+                Text {
+                    id: sliderOption1Label
+                    text: app.homeAssistantSlider1Min
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider1Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == app.homeAssistantSlider1Min ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption1Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect2
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect1.right
+                }
+
+                Text {
+                    id: sliderOption2Label
+                    text: app.homeAssistantSlider1Min + app.homeAssistantSlider1Step
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider2Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + app.homeAssistantSlider1Step) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption2Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect3
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect2.right
+                }
+
+                Text {
+                    id: sliderOption3Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 2)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider3Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 2)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption3Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect4
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect3.right
+                }
+
+                Text {
+                    id: sliderOption4Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 3)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider4Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 3)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption4Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect5
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect4.right
+                }
+
+                Text {
+                    id: sliderOption5Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 4)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider5Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 4)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption5Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect6
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect5.right
+                }
+
+                Text {
+                    id: sliderOption6Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 5)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider6Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 5)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption6Label.text);
+                        }
+                    }
+                }
             }
         }
     }
@@ -513,7 +754,7 @@ Screen {
     Text {
         id: switchTitle
         x: 300
-        y: 140
+        y: 130
         width: 125
         text: "Schakelaars"
         font.pixelSize: 16
@@ -530,7 +771,7 @@ Screen {
         anchors {
             top: switchTitle.bottom
             left: switchTitle.left
-            topMargin: 5
+            topMargin: 0
         }
 
         Text {
@@ -565,7 +806,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch1Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch1, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -600,7 +840,7 @@ Screen {
 
             anchors {
                 right: switchRect2.right
-                verticalCenter: switchRect2.verticalCenter  
+                verticalCenter: switchRect2.verticalCenter
             }
 
             MouseArea {
@@ -611,7 +851,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch2Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch2, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -656,7 +895,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch3Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch3, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -701,7 +939,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch4Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch4, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
@@ -746,7 +983,6 @@ Screen {
                     } else if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch5, 0);
                     }
-                    app.getSwitchInfo();
                 }
             }
         }
