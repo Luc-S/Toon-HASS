@@ -988,29 +988,531 @@ Screen {
         }
     }
 
-    // Alarm section
-    // Text {
-    //     id: alarmTitle
-    //     x: 570
-    //     y: 140
-    //     width: 125
-    //     text: "Alarm"
-    //     font.pixelSize: 16
-    //     font.family: qfont.semiBold.name
-    //     color: "Black"
-    //     wrapMode: Text.WordWrap
-    // }
+    //Alarm section
+    Text {
+        id: alarmTitle
+        x: 590
+        y: 130
+        width: 125
+        text: "Alarm"
+        font.pixelSize: 16
+        font.family: qfont.semiBold.name
+        color: "Black"
+        wrapMode: Text.WordWrap
+    }
 
-    // Rectangle {
-    //     id: alarmRect
-    //     anchors {
-    //         top: alarmTitle.bottom
-    //         left: alarmTitle.left
-    //         topMargin: 10
-    //     }
-    //     width: 200
-    //     height: 235
-    //     color: "white"
-    // }
+    Rectangle {
+        id: alarmRect
+        width: 195
+        height: 240
+        color: "transparent"
+        anchors {
+            top: alarmTitle.bottom
+            left: alarmTitle.left
+            topMargin: 5
+        }
+        
+        Rectangle {
+            id: alarmRectTop
+            width: 155
+            height: 35
+            radius: 10
+            color: "#e8e8e8"
+            anchors {
+                top: alarmRect.top
+                right: parent.right
+                rightMargin: 20
+            }
+
+            Text {
+                id: alarmInputLabel
+                text: app.homeAssistantAlarmCode
+                font.pixelSize: 24
+                font.family: qfont.semiBold.name
+                color: "Black"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect1
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRectTop.bottom
+                left: alarmRect.left
+                topMargin: 5
+            }
+
+            Image {
+                id: alarmRect1Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            Text {
+                id: alarmRect1Label
+                text: "1"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("1");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect2
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect1.top
+                left: alarmRect1.right
+            }
+
+            Image {
+                id: alarmRect2Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect2Label
+                text: "2"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn2"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect3
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect1.top
+                left: alarmRect2.right
+            }
+
+            Image {
+                id: alarmRect3Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            Text {
+                id: alarmRect3Label
+                text: "3"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn3"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect4
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect1.bottom
+                left: alarmRect1.left
+            }
+
+            Image {
+                id: alarmRect4Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            Text {
+                id: alarmRect4Label
+                text: "4"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn4"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect5
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect4.top
+                left: alarmRect4.right
+            }
+
+            Image {
+                id: alarmRect5Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect5Label
+                text: "5"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn5"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect6
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect4.top
+                left: alarmRect5.right
+            }
+
+            Image {
+                id: alarmRect6Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            Text {
+                id: alarmRect6Label
+                text: "6"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn6"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect7
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect4.bottom
+                left: alarmRect4.left
+            }
+
+            Image {
+                id: alarmRect7Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            Text {
+                id: alarmRect7Label
+                text: "7"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn7"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect8
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect7.top
+                left: alarmRect7.right
+            }
+
+            Image {
+                id: alarmRect8Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect8Label
+                text: "8"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn8"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect9
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect7.top
+                left: alarmRect8.right
+            }
+
+            Image {
+                id: alarmRect9Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            Text {
+                id: alarmRect9Label
+                text: "9"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn9"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRectReset
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect7.bottom
+                left: alarmRect7.left
+            }
+
+            Image {
+                id: alarmRectResetButton;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadReset.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.setHomeAssistant("alarm", "alarm_control_panel.alarm", 1);
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect0
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRectReset.top
+                left: alarmRectReset.right
+            }
+
+            Image {
+                id: alarmRect0Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect0Label
+                text: "0"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.message = "btn0"
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRectEnter
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect0.top
+                left: alarmRect0.right
+            }
+
+            Image {
+                id: alarmRectEnterButton;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadEnter.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.setHomeAssistant("alarm", "alarm_control_panel.alarm", 1);
+                }
+            }
+        }
+    }
 }
 

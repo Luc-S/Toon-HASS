@@ -190,6 +190,8 @@ App {
         source: "./switchInfo.json"
     }
 
+    property string homeAssistantAlarmCode : "_ _ _ _"
+
     //Store Home Assistant connection settings
     function saveHomeAssistantSettingsJson() {
         var homeAssistantSettingsJson = {
@@ -531,8 +533,12 @@ App {
                 fullUrl = state ? url + "/api/services/switch/turn_on" : url + "/api/services/switch/turn_off"
                 break;
             case "slider":
-                params = '{"entity_id": "' + entity + '", "value":"' + state + '"}'// "{ “entity_id”: “input_number.pool_run_time”, “value”: “{{NumberField}}” }"
+                params = '{"entity_id": "' + entity + '", "value":"' + state + '"}'
                 fullUrl = url + "/api/services/input_number/set_value";
+                break;
+            case "alarm":
+                params = state ? '{"entity_id": "' + entity + '", "code":"0000"}' : '{"entity_id": "' + entity + '", "code":"' + homeAssistantAlarmCode + '"}'
+                fullUrl = state ? url + "/api/services/alarm_control_panel/alarm_arm_away" : url + "/api/services/alarm_control_panel/alarm_disarm"
                 break;
             default:
                 pass
@@ -561,6 +567,14 @@ App {
         http.setRequestHeader("Content-Type", "application/json");  
         http.send(params); 
     
+    }
+
+    function alarmInput(num) {
+        homeAssistantAlarmCode = homeAssistantAlarmCode; //+ parseString(digit);
+    }
+
+    function alarmInputReset() {
+        homeAssistantAlarmCode = "_ _ _ _";
     }
 
 }
