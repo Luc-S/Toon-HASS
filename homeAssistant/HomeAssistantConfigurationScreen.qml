@@ -132,6 +132,18 @@ Screen {
         homeAssistantSwitch5Label.inputText = app.homeAssistantSwitch5;
     }
 
+    //Function to store entity_id of the alarm to application variable
+    function saveHomeAssistantAlarm1(text) {
+        app.homeAssistantAlarm1 = text;
+        homeAssistantAlarm1Label.inputText = app.homeAssistantAlarm1;
+    }
+
+    //Function to store entity_id of fifth switch to application variable
+    function saveHomeAssistantAlarm2(text) {
+        app.homeAssistantAlarm2 = text;
+        homeAssistantAlarm2Label.inputText = "*****";
+    }
+
     //Function to validate entered Home Assistant PORT number
     function numValidate(text, isFinal) {
         if (isFinal) {
@@ -170,6 +182,8 @@ Screen {
         homeAssistantSwitch3Label.inputText = app.homeAssistantSwitch3;
         homeAssistantSwitch4Label.inputText = app.homeAssistantSwitch4;
         homeAssistantSwitch5Label.inputText = app.homeAssistantSwitch5;
+        homeAssistantAlarm1Label.inputText = app.homeAssistantAlarm1;
+        homeAssistantAlarm2Label.inputText = "*****";
     }
 
     //Function to close the configuration form and save the textbox values to the usersettings file
@@ -420,7 +434,7 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     gridSensors.visible = false;
-                    gridSwitches.visible = true;
+                    gridAlarm.visible = true;
                 }
             }
         }
@@ -832,6 +846,134 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     gridSwitches.visible = false;
+                    gridAlarm.visible = true;
+                }
+            }
+        }
+    }
+
+    //Alarm settings textboxes
+    Rectangle {
+        id: gridAlarm
+        anchors.top: grid1.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 650
+        height: 250
+        radius: 10
+        color: "#e8e8e8"
+        visible: false
+        
+        Text {
+            id: page4Title
+            x: 20
+            y: 10
+            width: 120
+            text: "Alarm"
+            font.pixelSize: 14
+            font.family: qfont.semiBold.name
+            color: "Black"
+            wrapMode: Text.WordWrap
+        }
+
+        EditTextLabel4421 {
+            id: homeAssistantAlarm1Label
+            width: 610
+            height: 35
+            leftTextAvailableWidth: 300
+            leftText: "Entity ID:"
+            anchors {
+                top: page4Title.bottom
+                left: page4Title.left
+                topMargin: 10
+            }
+
+            onClicked: {
+                qkeyboard.open("Voer het entity_id in voor het alarm", homeAssistantAlarm1Label.inputText, saveHomeAssistantAlarm1)
+            }
+        }
+
+        EditTextLabel4421 {
+            id: homeAssistantAlarm2Label
+            width: 610
+            height: 35
+            leftTextAvailableWidth: 300
+            leftText: "Code:"
+            anchors {
+                top: homeAssistantAlarm1Label.bottom
+                left: homeAssistantAlarm1Label.left
+                topMargin: 6
+            }
+            
+            onClicked: {
+                homeAssistantAlarm2Label.inputText = "";
+                qkeyboard.open("Voer de Home Assistant code in voor het alarm", homeAssistantAlarm2Label.inputText, saveHomeAssistantAlarm2)
+            }
+        }
+
+        Rectangle {
+            width: 150
+            height: 35
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            color: "transparent"
+
+            Image {
+                id: navLeftButton4
+                width: 18
+                height: 28
+                source: "./drawables/navArrow-left.png"
+                smooth: true
+                anchors {
+                    right: parent.right
+                    rightMargin: 20
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    gridAlarm.visible = false; 
+                    gridSwitches.visible = true;
+                }
+            }
+        }
+
+        Image {
+                id: navPageImage4
+                width: 100
+                height: 28
+                source: "./drawables/page4.png"
+                smooth: true 
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                    bottomMargin: 10
+                }
+        }
+
+        Rectangle {
+            width: 150
+            height: 35
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            color: "transparent" 
+
+            Image {
+                id: navRightButton4
+                width: 18
+                height: 28
+                source: "./drawables/navArrow-right.png"
+                smooth: true 
+                anchors {
+                    left: parent.left
+                    leftMargin: 20
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    gridAlarm.visible = false;
                     gridSensors.visible = true;
                 }
             }

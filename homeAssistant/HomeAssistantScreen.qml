@@ -11,6 +11,71 @@ Screen {
         app.getSensorInfo();
         app.getSwitchInfo();
         app.getSliderInfo();
+        app.getAlarmInfo();
+        
+        if (app.homeAssistantSensor1) {
+            homeAssistantSensor1Name.visible = true;
+            homeAssistantSensor1Value.visible = true;
+        } else {
+            homeAssistantSensor1Name.visible = false;
+            homeAssistantSensor1Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor2) {
+            homeAssistantSensor2Name.visible = true;
+            homeAssistantSensor2Value.visible = true;
+        } else {
+            homeAssistantSensor2Name.visible = false;
+            homeAssistantSensor2Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor3) {
+            homeAssistantSensor3Name.visible = true;
+            homeAssistantSensor3Value.visible = true;
+        } else {
+            homeAssistantSensor3Name.visible = false;
+            homeAssistantSensor3Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor4) {
+            homeAssistantSensor4Name.visible = true;
+            homeAssistantSensor4Value.visible = true;
+        } else {
+            homeAssistantSensor4Name.visible = false;
+            homeAssistantSensor4Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor5) {
+            homeAssistantSensor5Name.visible = true;
+            homeAssistantSensor5Value.visible = true;
+        } else {
+            homeAssistantSensor5Name.visible = false;
+            homeAssistantSensor5Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor6) {
+            homeAssistantSensor6Name.visible = true;
+            homeAssistantSensor6Value.visible = true;
+        } else {
+            homeAssistantSensor6Name.visible = false;
+            homeAssistantSensor6Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor7) {
+            homeAssistantSensor7Name.visible = true;
+            homeAssistantSensor7Value.visible = true;
+        } else {
+            homeAssistantSensor7Name.visible = false;
+            homeAssistantSensor7Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor8) {
+            homeAssistantSensor8Name.visible = true;
+            homeAssistantSensor8Value.visible = true;
+        } else {
+            homeAssistantSensor8Name.visible = false;
+            homeAssistantSensor8Value.visible = false;
+        }
 
         if (app.homeAssistantScene1) {
             homeAssistantScene1Button.height = 75;
@@ -94,6 +159,14 @@ Screen {
             switchRect5.height = 0;
         }
 
+        if (app.homeAssistantAlarm1) {
+            alarmTitle.visible = true;
+            alarmRect.visible = true;
+        } else {
+            alarmTitle.visible = false;
+            alarmRect.visible = false;
+        }
+
     }
 
     onCustomButtonClicked: {
@@ -141,6 +214,7 @@ Screen {
                     app.getSensorInfo();
                     app.getSwitchInfo();
                     app.getSliderInfo();
+                    app.getAlarmInfo();
                 }
             }
         }
@@ -1026,9 +1100,10 @@ Screen {
 
             Text {
                 id: alarmInputLabel
-                text: app.homeAssistantAlarmCode
-                font.pixelSize: 24
+                text: app.homeAssistantAlarmCodeLabel
+                font.pixelSize: 10
                 font.family: qfont.semiBold.name
+                font.capitalization: Font.Capitalize
                 color: "Black"
                 anchors {
                     verticalCenter: parent.verticalCenter
@@ -1116,7 +1191,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn2"
+                    app.alarmInput("2");
                 }
             }
         }
@@ -1158,7 +1233,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn3"
+                    app.alarmInput("3");
                 }
             }
         }
@@ -1200,7 +1275,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn4"
+                    app.alarmInput("4");
                 }
             }
         }
@@ -1241,7 +1316,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn5"
+                    app.alarmInput("5");
                 }
             }
         }
@@ -1283,7 +1358,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn6"
+                    app.alarmInput("6");
                 }
             }
         }
@@ -1325,7 +1400,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn7"
+                    app.alarmInput("7");
                 }
             }
         }
@@ -1366,7 +1441,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn8"
+                    app.alarmInput("8");
                 }
             }
         }
@@ -1408,7 +1483,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn9"
+                    app.alarmInput("9");
                 }
             }
         }
@@ -1438,7 +1513,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.setHomeAssistant("alarm", "alarm_control_panel.alarm", 1);
+                    app.alarmInputReset();
                 }
             }
         }
@@ -1479,7 +1554,7 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.message = "btn0"
+                    app.alarmInput("0");
                 }
             }
         }
@@ -1498,7 +1573,7 @@ Screen {
                 id: alarmRectEnterButton;
                 width: 50
                 height: 50
-                source: "./drawables/dialpadEnter.png"
+                source: app.homeAssistantAlarmState == "disarmed" ? app.imgUnlocked : app.imgLocked
                 smooth: true
                 anchors {
                     verticalCenter: parent.verticalCenter
@@ -1509,7 +1584,13 @@ Screen {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    app.setHomeAssistant("alarm", "alarm_control_panel.alarm", 1);
+                    app.homeAssistantAlarmCodeLabel = "****";
+
+                    if (app.homeAssistantAlarmCode.length > 0) {
+                        app.setHomeAssistant("alarm", app.homeAssistantAlarm1, 0);
+                    } else {
+                        app.setHomeAssistant("alarm", app.homeAssistantAlarm1, 1);
+                    }
                 }
             }
         }
