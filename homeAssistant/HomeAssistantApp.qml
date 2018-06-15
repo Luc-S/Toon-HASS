@@ -93,16 +93,12 @@ App {
     property string homeAssistantScene2 : ""
     property string homeAssistantScene3 : ""
     property string homeAssistantScene4 : ""
-    property string homeAssistantScene5 : ""
-    property string homeAssistantScene6 : ""
 
     property variant homeAssistantScenesJson : {
         'Scene1': "",
         'Scene2': "",
         'Scene3': "",
         'Scene4': "",
-        'Scene5': "",
-        'Scene6': "",
     }
 
     FileIO {
@@ -114,22 +110,47 @@ App {
     property variant homeAssistantScene2Info : []
     property variant homeAssistantScene3Info : []
     property variant homeAssistantScene4Info : []
-    property variant homeAssistantScene5Info : []
-    property variant homeAssistantScene6Info : []
 
     property variant homeAssistantSceneInfoJson : {
         'Scene1Info': "",
         'Scene2Info': "",
         'Scene3Info': "",
         'Scene4Info': "",
-        'Scene5Info': "",
-        'Scene6Info': "",
     }
 
     FileIO {
         id: sceneInfoFile
         source: "./sceneInfo.json"
-    } 
+    }
+
+    property int sliderBtnWidth : 0
+    property string homeAssistantSlider1 : ""
+    property real homeAssistantSlider1Max : 0.0
+    property real homeAssistantSlider1Min : 0.0
+    property real homeAssistantSlider1Step : 0.0
+    property int homeAssistantSlider1Options : 0
+    property string imgNotSelected : "./drawables/notSelected.png"
+    property string imgSelected : "./drawables/selected.png"
+
+    property variant homeAssistantSlidersJson : {
+        'Slider1': "",
+    }
+
+    FileIO {
+        id: slidersFile
+        source: "./sliders.json"
+    }
+
+    property variant homeAssistantSlider1Info : []
+
+    property variant homeAssistantSliderInfoJson : {
+        'Slider1Info': "",
+    }
+
+    FileIO {
+        id: sliderInfoFile
+        source: "./sliderInfo.json"
+    }
 
     property string homeAssistantSwitch1 : ""
     property string homeAssistantSwitch2 : ""
@@ -169,6 +190,24 @@ App {
         source: "./switchInfo.json"
     }
 
+    property string homeAssistantAlarmCodeLabel : ""
+    property string homeAssistantAlarmCode : ""
+    property string homeAssistantAlarmState : ""
+    property string imgLocked : "./drawables/dialpadLocked.png"
+    property string imgUnlocked : "./drawables/dialpadUnlocked.png"
+    property string homeAssistantAlarm1 : ""
+    property string homeAssistantAlarm2 : ""
+
+    property variant homeAssistantAlarmJson : {
+        'Alarm1': "",
+        'Code' : "",
+    }
+
+    FileIO {
+        id: alarmFile
+        source: "./alarm.json"
+    }
+
     //Store Home Assistant connection settings
     function saveHomeAssistantSettingsJson() {
         var homeAssistantSettingsJson = {
@@ -188,7 +227,9 @@ App {
 
         saveHomeAssistantSensorsJson();
         saveHomeAssistantScenesJson();
+        saveHomeAssistantSlidersJson();
         saveHomeAssistantSwitchesJson();
+        saveHomeAssistantAlarmJson();
     }
 
     //Store sensor settings
@@ -203,9 +244,9 @@ App {
             "Sensor7" : homeAssistantSensor7,
             "Sensor8" : homeAssistantSensor8,
         }
-        var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sensors.json");
-        doc2.send(JSON.stringify(homeAssistantSensorsJson));
+        var doc3 = new XMLHttpRequest();
+        doc3.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sensors.json");
+        doc3.send(JSON.stringify(homeAssistantSensorsJson));
         
         getSensorInfo();
     }
@@ -258,9 +299,9 @@ App {
             "Sensor7Info" : homeAssistantSensor7Info,
             "Sensor8Info" : homeAssistantSensor8Info,
         }
-        var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sensorInfo.json");
-        doc2.send(JSON.stringify(homeAssistantSensorInfoJson));
+        var doc4 = new XMLHttpRequest();
+        doc4.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sensorInfo.json");
+        doc4.send(JSON.stringify(homeAssistantSensorInfoJson));
     }
 
     //Store scene settings
@@ -270,12 +311,10 @@ App {
             "Scene2" : homeAssistantScene2,
             "Scene3" : homeAssistantScene3,
             "Scene4" : homeAssistantScene4,
-            "Scene5" : homeAssistantScene5,
-            "Scene6" : homeAssistantScene6,
         }
-        var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/scenes.json");
-        doc2.send(JSON.stringify(homeAssistantScenesJson));
+        var doc5 = new XMLHttpRequest();
+        doc5.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/scenes.json");
+        doc5.send(JSON.stringify(homeAssistantScenesJson));
 
         getHomeAssistant(homeAssistantScene1, function(data) {
             homeAssistantScene1Info = data;
@@ -288,20 +327,12 @@ App {
 
                     getHomeAssistant(homeAssistantScene4, function(data) {
                         homeAssistantScene4Info = data;
-                        
-                        getHomeAssistant(homeAssistantScene5, function(data) {
-                            homeAssistantScene5Info = data;
-                            
-                            getHomeAssistant(homeAssistantScene6, function(data) {
-                                homeAssistantScene6Info = data;
-                                saveHomeAssistantSceneInfoJson();
-                            });
-                        });
+                        saveHomeAssistantSceneInfoJson();
                     });
                 });
             });
         });
-    }  
+    }
 
     //Store scene information retrieved from Home Assistant
     function saveHomeAssistantSceneInfoJson() {
@@ -310,14 +341,38 @@ App {
             "Scene2Info" : homeAssistantScene2Info,
             "Scene3Info" : homeAssistantScene3Info,
             "Scene4Info" : homeAssistantScene4Info,
-            "Scene5Info" : homeAssistantScene5Info,
-            "Scene6Info" : homeAssistantScene6Info,
         }
-        var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sceneInfo.json");
-        doc2.send(JSON.stringify(homeAssistantSceneInfoJson));
+        var doc6 = new XMLHttpRequest();
+        doc6.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sceneInfo.json");
+        doc6.send(JSON.stringify(homeAssistantSceneInfoJson));
     }
 
+    //Store slider settings
+    function saveHomeAssistantSlidersJson() {
+        var homeAssistantSlidersJson = {
+            "Slider1" : homeAssistantSlider1,
+        }
+        var doc7 = new XMLHttpRequest();
+        doc7.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliders.json");
+        doc7.send(JSON.stringify(homeAssistantSlidersJson));
+    }
+
+    function getSliderInfo() {
+        getHomeAssistant(homeAssistantSlider1, function(data) {
+            homeAssistantSlider1Info = data;
+            saveHomeAssistantSliderInfoJson();
+        });
+    }
+
+    //Store slider information retrieved from Home Assistant
+    function saveHomeAssistantSliderInfoJson() {
+        var homeAssistantSliderInfoJson = {
+            "Slider1Info" : homeAssistantSlider1Info,
+        }
+        var doc8 = new XMLHttpRequest();
+        doc8.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliderInfo.json");
+        doc8.send(JSON.stringify(homeAssistantSliderInfoJson));
+    }
 
     //Store switch settings
     function saveHomeAssistantSwitchesJson() {
@@ -328,11 +383,9 @@ App {
             "Switch4" : homeAssistantSwitch4,
             "Switch5" : homeAssistantSwitch5,
         }
-        var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switches.json");
-        doc2.send(JSON.stringify(homeAssistantSwitchesJson));
-        
-        getSwitchInfo();
+        var doc9 = new XMLHttpRequest();
+        doc9.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switches.json");
+        doc9.send(JSON.stringify(homeAssistantSwitchesJson));
     }
 
     //Retrieve switch information from Home Assistant
@@ -368,11 +421,28 @@ App {
             "Switch4Info" : homeAssistantSwitch4Info,
             "Switch5Info" : homeAssistantSwitch5Info,
         }
-        var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switchInfo.json");
-        doc2.send(JSON.stringify(homeAssistantSwitchInfoJson));
+        var doc10 = new XMLHttpRequest();
+        doc10.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switchInfo.json");
+        doc10.send(JSON.stringify(homeAssistantSwitchInfoJson));
     }
 
+    //Store alarm settings
+    function saveHomeAssistantAlarmJson() {
+        var homeAssistantAlarmJson = {
+            "Alarm1" : homeAssistantAlarm1,
+            "Code" : homeAssistantAlarm2,
+        }
+        var doc11 = new XMLHttpRequest();
+        doc11.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/alarm.json");
+        doc11.send(JSON.stringify(homeAssistantAlarmJson));
+    }
+
+    function getAlarmInfo() {
+        getHomeAssistant(homeAssistantAlarm1, function(data) {
+            homeAssistantAlarmState = JSON.parse(data)['state'];
+            homeAssistantAlarmCodeLabel = homeAssistantAlarmState;
+        });
+    }
 
     function init() {
         registry.registerWidget("tile", tileUrl, this, null, {thumbLabel: qsTr("homeAssistant"), thumbIcon: thumbnailIcon, thumbCategory: "general", thumbWeight: 30, baseTileWeight: 10, baseTileSolarWeight: 10, thumbIconVAlignment: "center"});
@@ -392,6 +462,9 @@ App {
         homeAssistantSwitchInfoJson = JSON.parse(switchInfoFile.read());
         homeAssistantSensorsJson = JSON.parse(sensorFile.read());
         homeAssistantSensorInfoJson = JSON.parse(sensorInfoFile.read());
+        homeAssistantSlidersJson = JSON.parse(slidersFile.read());
+        homeAssistantSliderInfoJson = JSON.parse(sliderInfoFile.read());
+        homeAssistantAlarmJson = JSON.parse(alarmFile.read());
 
         homeAssistantServer = homeAssistantSettingsJson ['Server'];
         homeAssistantPort = homeAssistantSettingsJson ['Port'];
@@ -407,15 +480,22 @@ App {
         homeAssistantScene2 = homeAssistantScenesJson ['Scene2'];
         homeAssistantScene3 = homeAssistantScenesJson ['Scene3'];
         homeAssistantScene4 = homeAssistantScenesJson ['Scene4'];
-        homeAssistantScene5 = homeAssistantScenesJson ['Scene5'];
-        homeAssistantScene6 = homeAssistantScenesJson ['Scene6'];
 
         homeAssistantScene1Info = homeAssistantSceneInfoJson ['Scene1Info'];
         homeAssistantScene2Info = homeAssistantSceneInfoJson ['Scene2Info'];
         homeAssistantScene3Info = homeAssistantSceneInfoJson ['Scene3Info'];
         homeAssistantScene4Info = homeAssistantSceneInfoJson ['Scene4Info'];
-        homeAssistantScene5Info = homeAssistantSceneInfoJson ['Scene5Info'];
-        homeAssistantScene6Info = homeAssistantSceneInfoJson ['Scene6Info'];
+
+        homeAssistantSlider1 = homeAssistantSlidersJson ['Slider1'];
+        homeAssistantSlider1Info = homeAssistantSliderInfoJson ['Slider1Info'];
+
+        if (homeAssistantSlider1Info) {
+            homeAssistantSlider1Max = (JSON.parse(homeAssistantSlider1Info)['attributes']['max']).toFixed(1);
+            homeAssistantSlider1Min = (JSON.parse(homeAssistantSlider1Info)['attributes']['min']).toFixed(1);
+            homeAssistantSlider1Step = (JSON.parse(homeAssistantSlider1Info)['attributes']['step']).toFixed(1);
+
+            homeAssistantSlider1Options = Math.round(((homeAssistantSlider1Max - homeAssistantSlider1Min) / homeAssistantSlider1Step) + 1);
+        }
         
         homeAssistantSwitch1 = homeAssistantSwitchesJson ['Switch1'];
         homeAssistantSwitch2 = homeAssistantSwitchesJson ['Switch2'];
@@ -446,18 +526,25 @@ App {
         homeAssistantSensor6Info = homeAssistantSensorInfoJson ['Sensor6Info'];
         homeAssistantSensor7Info = homeAssistantSensorInfoJson ['Sensor7Info'];
         homeAssistantSensor8Info = homeAssistantSensorInfoJson ['Sensor8Info'];
+
+        homeAssistantAlarm1 = homeAssistantAlarmJson ['Alarm1'];
+        homeAssistantAlarm2 = homeAssistantAlarmJson ['Code'];
+
     }
 
     function getHomeAssistant(entity, callback) {
         var http = new XMLHttpRequest();
         var fullUrl = "";
-        var urlExtension = "/api/states/" + entity;
+        var urlExtension = entity ? "/api/states/" + entity : "/api/states";
 
         http.onreadystatechange = function() { // Call a function when the state changes.
             if (http.readyState == 4) {
+                //message = "1: " + http.readyState;
                 if (http.status == 200) {
+                    //message = "2: " + http.responseText;
                     callback(http.responseText);
                 } else {
+                    //message = "3: " + http.responseText;
                     callback(http.status);
                 }
             }
@@ -484,13 +571,21 @@ App {
                 fullUrl = url + "/api/services/scene/turn_on";
                 break;
             case "switch":
-                fullUrl = state ? url + "/api/services/switch/turn_on" : url + "/api/services/switch/turn_off"
+                fullUrl = state ? url + "/api/services/switch/turn_on" : url + "/api/services/switch/turn_off";
+                break;
+            case "slider":
+                params = '{"entity_id": "' + entity + '", "value":"' + state + '"}';
+                fullUrl = url + "/api/services/input_number/set_value";
+                break;
+            case "alarm":
+                params = state ? '{"entity_id": "' + entity + '", "code":"' + homeAssistantAlarm2 + '"}' : '{"entity_id": "' + entity + '", "code":"' + homeAssistantAlarmCode + '"}';
+                fullUrl = state ? url + "/api/services/alarm_control_panel/alarm_arm_away" : url + "/api/services/alarm_control_panel/alarm_disarm";
                 break;
             default:
                 pass
         }
 
-        http.onreadystatechange = function() { // Call a function when the state changes.
+        http.onreadystatechange = function(type, entity) { // Call a function when the state changes.
             if (http.readyState == 4) {
                 if (http.status == 200) {
                     return true;
@@ -500,6 +595,9 @@ App {
                 }
             }
             getSwitchInfo();
+            getSliderInfo();
+            getAlarmInfo();
+            alarmInputReset();
         }
 
         http.open("POST", fullUrl, true);
@@ -512,6 +610,33 @@ App {
         http.setRequestHeader("Content-Type", "application/json");  
         http.send(params); 
     
+    }
+
+    function alarmInput(num) {
+        if (homeAssistantAlarmCode.length < 5) {
+            homeAssistantAlarmCode = homeAssistantAlarmCode + num;
+            switch(homeAssistantAlarmCode.length) {
+                case 1:
+                    homeAssistantAlarmCodeLabel = num;
+                    break;
+                case 2:
+                    homeAssistantAlarmCodeLabel = "*" + num;
+                    break;
+                case 3:
+                    homeAssistantAlarmCodeLabel = "**" + num;
+                    break;
+                case 4:
+                    homeAssistantAlarmCodeLabel = "***" + num;
+                    break;
+                default:
+                    pass
+            }
+        }
+    }
+
+    function alarmInputReset() {
+        homeAssistantAlarmCode = "";
+        homeAssistantAlarmCodeLabel = homeAssistantAlarmState;
     }
 
 }

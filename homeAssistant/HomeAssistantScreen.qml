@@ -10,6 +10,72 @@ Screen {
 
         app.getSensorInfo();
         app.getSwitchInfo();
+        app.getSliderInfo();
+        app.getAlarmInfo();
+        
+        if (app.homeAssistantSensor1) {
+            homeAssistantSensor1Name.visible = true;
+            homeAssistantSensor1Value.visible = true;
+        } else {
+            homeAssistantSensor1Name.visible = false;
+            homeAssistantSensor1Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor2) {
+            homeAssistantSensor2Name.visible = true;
+            homeAssistantSensor2Value.visible = true;
+        } else {
+            homeAssistantSensor2Name.visible = false;
+            homeAssistantSensor2Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor3) {
+            homeAssistantSensor3Name.visible = true;
+            homeAssistantSensor3Value.visible = true;
+        } else {
+            homeAssistantSensor3Name.visible = false;
+            homeAssistantSensor3Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor4) {
+            homeAssistantSensor4Name.visible = true;
+            homeAssistantSensor4Value.visible = true;
+        } else {
+            homeAssistantSensor4Name.visible = false;
+            homeAssistantSensor4Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor5) {
+            homeAssistantSensor5Name.visible = true;
+            homeAssistantSensor5Value.visible = true;
+        } else {
+            homeAssistantSensor5Name.visible = false;
+            homeAssistantSensor5Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor6) {
+            homeAssistantSensor6Name.visible = true;
+            homeAssistantSensor6Value.visible = true;
+        } else {
+            homeAssistantSensor6Name.visible = false;
+            homeAssistantSensor6Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor7) {
+            homeAssistantSensor7Name.visible = true;
+            homeAssistantSensor7Value.visible = true;
+        } else {
+            homeAssistantSensor7Name.visible = false;
+            homeAssistantSensor7Value.visible = false;
+        }
+
+        if (app.homeAssistantSensor8) {
+            homeAssistantSensor8Name.visible = true;
+            homeAssistantSensor8Value.visible = true;
+        } else {
+            homeAssistantSensor8Name.visible = false;
+            homeAssistantSensor8Value.visible = false;
+        }
 
         if (app.homeAssistantScene1) {
             homeAssistantScene1Button.height = 75;
@@ -18,6 +84,7 @@ Screen {
             homeAssistantScene1Button.visible = false;
             homeAssistantScene1Button.height = 0;
         }
+
         if (app.homeAssistantScene2) {
             homeAssistantScene2Button.height = 75;
             homeAssistantScene2Button.visible = true;
@@ -25,6 +92,7 @@ Screen {
             homeAssistantScene2Button.visible = false;
             homeAssistantScene2Button.height = 0;
         }
+
         if (app.homeAssistantScene3) {
             homeAssistantScene3Button.height = 75;
             homeAssistantScene3Button.visible = true;
@@ -32,6 +100,7 @@ Screen {
             homeAssistantScene3Button.visible = false;
             homeAssistantScene3Button.height = 0;
         }
+
         if (app.homeAssistantScene4) {
             homeAssistantScene4Button.height = 75;
             homeAssistantScene4Button.visible = true; 
@@ -40,20 +109,14 @@ Screen {
             homeAssistantScene4Button.height = 0;
         }
 
-        if (app.homeAssistantScene5) {
-            homeAssistantScene5Button.height = 75;
-            homeAssistantScene5Button.visible = true; 
-        } else {        
-            homeAssistantScene5Button.visible = false;
-            homeAssistantScene5Button.height = 0;
-        }
+        if (app.homeAssistantSlider1) {
+            sliderArea.visible = true;
 
-        if (app.homeAssistantScene6) {
-            homeAssistantScene6Button.height = 75;
-            homeAssistantScene6Button.visible = true; 
-        } else {        
-            homeAssistantScene6Button.visible = false;
-            homeAssistantScene6Button.height = 0;
+            if (app.homeAssistantSlider1Options > 0) {
+                app.sliderBtnWidth = Math.round(245 / app.homeAssistantSlider1Options);
+            }
+        } else {
+            sliderArea.visible = false;
         }
 
         if (app.homeAssistantSwitch1) {
@@ -96,6 +159,14 @@ Screen {
             switchRect5.height = 0;
         }
 
+        if (app.homeAssistantAlarm1) {
+            alarmTitle.visible = true;
+            alarmRect.visible = true;
+        } else {
+            alarmTitle.visible = false;
+            alarmRect.visible = false;
+        }
+
     }
 
     onCustomButtonClicked: {
@@ -109,7 +180,7 @@ Screen {
     Text {
         id: title
         x: 30
-        y: 5
+        y: 0
         width: 740
         text: app.message
         font.pixelSize: 10
@@ -122,7 +193,7 @@ Screen {
     Rectangle {
         id: sensorRect
         x: 30
-        y: 25
+        y: 15
         width: 740
         height: 100
         radius: 10
@@ -142,6 +213,8 @@ Screen {
                 onClicked: {
                     app.getSensorInfo();
                     app.getSwitchInfo();
+                    app.getSliderInfo();
+                    app.getAlarmInfo();
                 }
             }
         }
@@ -377,12 +450,11 @@ Screen {
         }
     }
 
-
     //Scene section
     Text {
         id: sceneTitle
         x: 30
-        y: 140
+        y: 130
         width: 245
         text: "Scenes"
         font.pixelSize: 16
@@ -396,10 +468,10 @@ Screen {
         anchors {
             top: sceneTitle.bottom
             left: sceneTitle.left
-            topMargin: 10
+            topMargin: 5
         }
         width: 245
-        height: 235
+        height: 160
         color: "transparent"
 
         IconButton {
@@ -443,9 +515,9 @@ Screen {
             text: JSON.parse(app.homeAssistantScene3Info)['attributes']['friendly_name']
 
             anchors {
-                left: homeAssistantScene2Button.left
-                top: homeAssistantScene2Button.bottom
-                topMargin: 5
+                left: homeAssistantScene1Button.right
+                top: homeAssistantScene1Button.top
+                leftMargin: 5
             }
 
             bottomClickMargin: 3
@@ -461,9 +533,9 @@ Screen {
             text: JSON.parse(app.homeAssistantScene4Info)['attributes']['friendly_name']
  
             anchors {
-                left: homeAssistantScene1Button.right
-                top: homeAssistantScene1Button.top
-                leftMargin: 5
+                left: homeAssistantScene3Button.left
+                top: homeAssistantScene3Button.bottom
+                topMargin: 5
             }
 
             bottomClickMargin: 3
@@ -471,40 +543,283 @@ Screen {
                 app.setHomeAssistant("scene", app.homeAssistantScene4);
             }
         }
+    }
 
-        IconButton {
-            id: homeAssistantScene5Button
-            width: 120
-            height: 75
-            text: JSON.parse(app.homeAssistantScene5Info)['attributes']['friendly_name']
+    //Slider section
+    Rectangle {
+        id: sliderArea
+        width: 245
+        height: 85
+        color: "transparent"
+        anchors {
+            top: sceneRect.bottom
+            left: sceneRect.left
+            topMargin: 10
+        }
 
+        Text {
+            id: sliderTitle
+            width: 245
+            height: 27
+            text: JSON.parse(app.homeAssistantSlider1Info)['attributes']['friendly_name']
+            font.pixelSize: 16
+            font.family: qfont.semiBold.name
+            color: "Black"
+            wrapMode: Text.WordWrap
             anchors {
-                left: homeAssistantScene4Button.left
-                top: homeAssistantScene4Button.bottom
-                topMargin: 5
-            }
-
-            bottomClickMargin: 3
-            onClicked: {
-                app.setHomeAssistant("scene", app.homeAssistantScene5);
+                top: parent.top
+                left: parent.left
             }
         }
 
-        IconButton {
-            id: homeAssistantScene6Button
-            width: 120
-            height: 75
-            text: JSON.parse(app.homeAssistantScene6Info)['attributes']['friendly_name']
- 
+        Rectangle {
+            id: sliderRect
+            width: 245
+            height: 40
+            color: "transparent"
             anchors {
-                left: homeAssistantScene5Button.left
-                top: homeAssistantScene5Button.bottom
-                topMargin: 5
+                top: sliderTitle.bottom
+                left: parent.left
             }
 
-            bottomClickMargin: 3
-            onClicked: { 
-                app.setHomeAssistant("scene", app.homeAssistantScene6);
+            Rectangle {
+                id: sliderRect1
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: parent.left
+                }
+
+                Text {
+                    id: sliderOption1Label
+                    text: app.homeAssistantSlider1Min
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider1Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == app.homeAssistantSlider1Min ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption1Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect2
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect1.right
+                }
+
+                Text {
+                    id: sliderOption2Label
+                    text: app.homeAssistantSlider1Min + app.homeAssistantSlider1Step
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider2Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + app.homeAssistantSlider1Step) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption2Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect3
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect2.right
+                }
+
+                Text {
+                    id: sliderOption3Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 2)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider3Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 2)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption3Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect4
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect3.right
+                }
+
+                Text {
+                    id: sliderOption4Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 3)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider4Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 3)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption4Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect5
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect4.right
+                }
+
+                Text {
+                    id: sliderOption5Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 4)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider5Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 4)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption5Label.text);
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: sliderRect6
+                width: app.sliderBtnWidth
+                height: parent.height
+                color: "transparent"
+                anchors {
+                    left: sliderRect5.right
+                }
+
+                Text {
+                    id: sliderOption6Label
+                    text: app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 5)
+                    font.pixelSize: 10
+                    color: "Black"
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                }
+
+                Image {
+                    id: homeAssistantSlider6Selection
+                    width: parent.width
+                    height: parent.height
+                    source: JSON.parse(app.homeAssistantSlider1Info)['state'] == (app.homeAssistantSlider1Min + (app.homeAssistantSlider1Step * 5)) ? app.imgSelected : app.imgNotSelected
+                    smooth: true
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption6Label.text);
+                        }
+                    }
+                }
             }
         }
     }
@@ -513,7 +828,7 @@ Screen {
     Text {
         id: switchTitle
         x: 300
-        y: 140
+        y: 130
         width: 125
         text: "Schakelaars"
         font.pixelSize: 16
@@ -530,7 +845,7 @@ Screen {
         anchors {
             top: switchTitle.bottom
             left: switchTitle.left
-            topMargin: 5
+            topMargin: 0
         }
 
         Text {
@@ -599,7 +914,7 @@ Screen {
 
             anchors {
                 right: switchRect2.right
-                verticalCenter: switchRect2.verticalCenter  
+                verticalCenter: switchRect2.verticalCenter
             }
 
             MouseArea {
@@ -741,6 +1056,540 @@ Screen {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch5, 1);
                     } else if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "on") {
                         app.setHomeAssistant("switch", app.homeAssistantSwitch5, 0);
+                    }
+                }
+            }
+        }
+    }
+
+    //Alarm section
+    Text {
+        id: alarmTitle
+        x: 590
+        y: 130
+        width: 125
+        text: "Alarm"
+        font.pixelSize: 16
+        font.family: qfont.semiBold.name
+        color: "Black"
+        wrapMode: Text.WordWrap
+    }
+
+    Rectangle {
+        id: alarmRect
+        width: 195
+        height: 240
+        color: "transparent"
+        anchors {
+            top: alarmTitle.bottom
+            left: alarmTitle.left
+            topMargin: 5
+        }
+        
+        Rectangle {
+            id: alarmRectTop
+            width: 155
+            height: 35
+            radius: 10
+            color: "#e8e8e8"
+            anchors {
+                top: alarmRect.top
+                right: parent.right
+                rightMargin: 20
+            }
+
+            Text {
+                id: alarmInputLabel
+                text: app.homeAssistantAlarmCodeLabel
+                font.pixelSize: 10
+                font.family: qfont.semiBold.name
+                font.capitalization: Font.Capitalize
+                color: "Black"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect1
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRectTop.bottom
+                left: alarmRect.left
+                topMargin: 5
+            }
+
+            Image {
+                id: alarmRect1Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            Text {
+                id: alarmRect1Label
+                text: "1"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("1");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect2
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect1.top
+                left: alarmRect1.right
+            }
+
+            Image {
+                id: alarmRect2Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect2Label
+                text: "2"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("2");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect3
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect1.top
+                left: alarmRect2.right
+            }
+
+            Image {
+                id: alarmRect3Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            Text {
+                id: alarmRect3Label
+                text: "3"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("3");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect4
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect1.bottom
+                left: alarmRect1.left
+            }
+
+            Image {
+                id: alarmRect4Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            Text {
+                id: alarmRect4Label
+                text: "4"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("4");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect5
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect4.top
+                left: alarmRect4.right
+            }
+
+            Image {
+                id: alarmRect5Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect5Label
+                text: "5"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("5");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect6
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect4.top
+                left: alarmRect5.right
+            }
+
+            Image {
+                id: alarmRect6Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            Text {
+                id: alarmRect6Label
+                text: "6"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("6");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect7
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect4.bottom
+                left: alarmRect4.left
+            }
+
+            Image {
+                id: alarmRect7Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            Text {
+                id: alarmRect7Label
+                text: "7"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("7");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect8
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect7.top
+                left: alarmRect7.right
+            }
+
+            Image {
+                id: alarmRect8Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect8Label
+                text: "8"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("8");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect9
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect7.top
+                left: alarmRect8.right
+            }
+
+            Image {
+                id: alarmRect9Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            Text {
+                id: alarmRect9Label
+                text: "9"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: 21
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("9");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRectReset
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect7.bottom
+                left: alarmRect7.left
+            }
+
+            Image {
+                id: alarmRectResetButton;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadReset.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInputReset();
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRect0
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRectReset.top
+                left: alarmRectReset.right
+            }
+
+            Image {
+                id: alarmRect0Button;
+                width: 50
+                height: 50
+                source: "./drawables/dialpadButton.png"
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Text {
+                id: alarmRect0Label
+                text: "0"
+                font.pixelSize: 14
+                color: "#757575"
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.alarmInput("0");
+                }
+            }
+        }
+
+        Rectangle {
+            id: alarmRectEnter
+            height: 50
+            width: 65
+            color: "transparent"
+            anchors {
+                top: alarmRect0.top
+                left: alarmRect0.right
+            }
+
+            Image {
+                id: alarmRectEnterButton;
+                width: 50
+                height: 50
+                source: app.homeAssistantAlarmState == "disarmed" ? app.imgUnlocked : app.imgLocked
+                smooth: true
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    app.homeAssistantAlarmCodeLabel = "****";
+
+                    if (app.homeAssistantAlarmCode.length > 0) {
+                        app.setHomeAssistant("alarm", app.homeAssistantAlarm1, 0);
+                    } else {
+                        app.setHomeAssistant("alarm", app.homeAssistantAlarm1, 1);
                     }
                 }
             }
