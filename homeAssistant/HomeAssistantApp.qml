@@ -355,6 +355,8 @@ App {
         var doc7 = new XMLHttpRequest();
         doc7.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliders.json");
         doc7.send(JSON.stringify(homeAssistantSlidersJson));
+
+        getSliderInfo();
     }
 
     function getSliderInfo() {
@@ -372,6 +374,19 @@ App {
         var doc8 = new XMLHttpRequest();
         doc8.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliderInfo.json");
         doc8.send(JSON.stringify(homeAssistantSliderInfoJson));
+        buildSliderObject();
+    }
+
+    function buildSliderObject() {
+        homeAssistantSlider1Max = (JSON.parse(homeAssistantSlider1Info)['attributes']['max']).toFixed(1);
+        homeAssistantSlider1Min = (JSON.parse(homeAssistantSlider1Info)['attributes']['min']).toFixed(1);
+        homeAssistantSlider1Step = (JSON.parse(homeAssistantSlider1Info)['attributes']['step']).toFixed(1);
+
+        homeAssistantSlider1Options = Math.round(((homeAssistantSlider1Max - homeAssistantSlider1Min) / homeAssistantSlider1Step) + 1);
+
+        if (homeAssistantSlider1Options > 0) {
+            sliderBtnWidth = Math.round(245 / homeAssistantSlider1Options);
+        }
     }
 
     //Store switch settings
@@ -490,11 +505,7 @@ App {
         homeAssistantSlider1Info = homeAssistantSliderInfoJson ['Slider1Info'];
 
         if (homeAssistantSlider1Info) {
-            homeAssistantSlider1Max = (JSON.parse(homeAssistantSlider1Info)['attributes']['max']).toFixed(1);
-            homeAssistantSlider1Min = (JSON.parse(homeAssistantSlider1Info)['attributes']['min']).toFixed(1);
-            homeAssistantSlider1Step = (JSON.parse(homeAssistantSlider1Info)['attributes']['step']).toFixed(1);
-
-            homeAssistantSlider1Options = Math.round(((homeAssistantSlider1Max - homeAssistantSlider1Min) / homeAssistantSlider1Step) + 1);
+            buildSliderObject();
         }
         
         homeAssistantSwitch1 = homeAssistantSwitchesJson ['Switch1'];

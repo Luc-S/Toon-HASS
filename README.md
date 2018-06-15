@@ -4,8 +4,10 @@ This application is built to integrate some Home Assistant functionalities in To
 
 My main goal was to enable some key features on the Toon thermostat so i didn't need a second screen on the wall. For extended details about my home automation I will grab my laptop. With this idea in mind I built integration for;
 - 8 sensors
-- 6 scenes
+- 4 scenes
 - 5 switches
+- 1 input_number (max 6 options)
+- 1 custom alarm
 
 I know there is still some space left but I'm going to create a little numpad to control my alarm system. As this alarm system is pretty uncommon I didn't include it in this github (also I haven't built it yet :) ). I'm not a developer so I'm sure the code isn't what it should be, if you have any remarks or hints/tips about some pieces of code please let me know.
 
