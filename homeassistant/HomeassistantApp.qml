@@ -7,14 +7,14 @@ import FileIO 1.0
 App {
     id: homeassistantApp
 
-    property url tileUrl : "HomeAssistantTile.qml";
+    property url tileUrl : "HomeassistantTile.qml";
     property url thumbnailIcon: "drawables/homeAssistant.png";
 
     property HomeAssistantConfigurationScreen homeAssistantConfigurationScreen
-    property url homeAssistantConfigurationScreenUrl : "HomeAssistantConfigurationScreen.qml"
+    property url homeAssistantConfigurationScreenUrl : "HomeassistantConfigurationScreen.qml"
 
     property HomeAssistantScreen homeAssistantScreen 
-    property url homeAssistantScreenUrl : "HomeAssistantScreen.qml"
+    property url homeAssistantScreenUrl : "HomeassistantScreen.qml"
 
     property string message : ""
 
