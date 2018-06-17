@@ -10,11 +10,11 @@ App {
     property url tileUrl : "HomeassistantTile.qml";
     property url thumbnailIcon: "drawables/homeAssistant.png";
 
-    property HomeAssistantConfigurationScreen homeAssistantConfigurationScreen
-    property url homeAssistantConfigurationScreenUrl : "HomeAssistantConfigurationScreen.qml"
+    property HomeassistantConfigurationScreen homeAssistantConfigurationScreen
+    property url homeAssistantConfigurationScreenUrl : "HomeassistantConfigurationScreen.qml"
 
-    property HomeAssistantScreen homeAssistantScreen 
-    property url homeAssistantScreenUrl : "HomeAssistantScreen.qml"
+    property HomeassistantScreen homeAssistantScreen 
+    property url homeAssistantScreenUrl : "HomeassistantScreen.qml"
 
     property string message : ""
 
