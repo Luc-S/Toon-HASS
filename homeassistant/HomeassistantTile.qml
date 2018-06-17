@@ -14,7 +14,7 @@ Tile {
 
 	Image {
 		id: homeAssistantIconSmall
-		source: "./drawables/homeAssistantIconSmall.png"
+		source: dimState ? "./drawables/homeAssistantIconSmallDim.png" : "./drawables/homeAssistantIconSmall.png"
 		anchors {
 			baseline: parent.top
 			baselineOffset: 64
