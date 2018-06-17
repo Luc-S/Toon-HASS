@@ -216,7 +216,7 @@ App {
             "Pass" : homeAssistantPass,
         }
         var doc2 = new XMLHttpRequest();
-        doc2.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/userSettings.json");
+        doc2.open("PUT", "file:///HCBv2/qml/apps/homeassistant/userSettings.json");
         doc2.send(JSON.stringify(homeAssistantSettingsJson));
 
         url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
@@ -245,7 +245,7 @@ App {
             "Sensor8" : homeAssistantSensor8,
         }
         var doc3 = new XMLHttpRequest();
-        doc3.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sensors.json");
+        doc3.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sensors.json");
         doc3.send(JSON.stringify(homeAssistantSensorsJson));
         
         getSensorInfo();
@@ -300,7 +300,7 @@ App {
             "Sensor8Info" : homeAssistantSensor8Info,
         }
         var doc4 = new XMLHttpRequest();
-        doc4.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sensorInfo.json");
+        doc4.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sensorInfo.json");
         doc4.send(JSON.stringify(homeAssistantSensorInfoJson));
     }
 
@@ -313,7 +313,7 @@ App {
             "Scene4" : homeAssistantScene4,
         }
         var doc5 = new XMLHttpRequest();
-        doc5.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/scenes.json");
+        doc5.open("PUT", "file:///HCBv2/qml/apps/homeassistant/scenes.json");
         doc5.send(JSON.stringify(homeAssistantScenesJson));
 
         getHomeAssistant(homeAssistantScene1, function(data) {
@@ -343,7 +343,7 @@ App {
             "Scene4Info" : homeAssistantScene4Info,
         }
         var doc6 = new XMLHttpRequest();
-        doc6.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sceneInfo.json");
+        doc6.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sceneInfo.json");
         doc6.send(JSON.stringify(homeAssistantSceneInfoJson));
     }
 
@@ -353,7 +353,7 @@ App {
             "Slider1" : homeAssistantSlider1,
         }
         var doc7 = new XMLHttpRequest();
-        doc7.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliders.json");
+        doc7.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sliders.json");
         doc7.send(JSON.stringify(homeAssistantSlidersJson));
 
         getSliderInfo();
@@ -372,7 +372,7 @@ App {
             "Slider1Info" : homeAssistantSlider1Info,
         }
         var doc8 = new XMLHttpRequest();
-        doc8.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/sliderInfo.json");
+        doc8.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sliderInfo.json");
         doc8.send(JSON.stringify(homeAssistantSliderInfoJson));
         buildSliderObject();
     }
@@ -399,7 +399,7 @@ App {
             "Switch5" : homeAssistantSwitch5,
         }
         var doc9 = new XMLHttpRequest();
-        doc9.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switches.json");
+        doc9.open("PUT", "file:///HCBv2/qml/apps/homeassistant/switches.json");
         doc9.send(JSON.stringify(homeAssistantSwitchesJson));
     }
 
@@ -437,7 +437,7 @@ App {
             "Switch5Info" : homeAssistantSwitch5Info,
         }
         var doc10 = new XMLHttpRequest();
-        doc10.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/switchInfo.json");
+        doc10.open("PUT", "file:///HCBv2/qml/apps/homeassistant/switchInfo.json");
         doc10.send(JSON.stringify(homeAssistantSwitchInfoJson));
     }
 
@@ -448,7 +448,7 @@ App {
             "Code" : homeAssistantAlarm2,
         }
         var doc11 = new XMLHttpRequest();
-        doc11.open("PUT", "file:///HCBv2/qml/apps/homeAssistant/alarm.json");
+        doc11.open("PUT", "file:///HCBv2/qml/apps/homeassistant/alarm.json");
         doc11.send(JSON.stringify(homeAssistantAlarmJson));
     }
 
