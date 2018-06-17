@@ -13,13 +13,13 @@ I know there is still some space left but I'm going to create a little numpad to
 
 
 How to install:
-1. Copy the homeAssistant folder to Toon directory "/HCBv2/qml/apps/"
-2. Edit file "/HCBv2/qml/qb/base/Globals.qml"; Add ""homeAssistant"," to the list of apps to load (make sure to save your changes)
+1. Copy the homeassistant folder to Toon directory "/HCBv2/qml/apps/"
+2. On firmware before 4.16 edit file "/HCBv2/qml/qb/base/Globals.qml"; Add ""homeassistant"," to the list of apps to load (make sure to save your changes)
 
 ![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/Globals.qml.png)
 
 3. Run command "killall qt-gui" to restart Toons user interface
-4. Add the app called "homeAssistant" to a new tile
+4. Add the app called "homeassistant" to a new tile
 
 ![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/tile.png)
 
