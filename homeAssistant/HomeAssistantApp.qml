@@ -5,7 +5,7 @@ import qb.base 1.0;
 import FileIO 1.0
 
 App {
-    id: homeAssistantApp
+    id: homeassistantApp
 
     property url tileUrl : "HomeAssistantTile.qml";
     property url thumbnailIcon: "drawables/homeAssistant.png";
