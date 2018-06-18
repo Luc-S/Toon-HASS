@@ -205,13 +205,61 @@ Screen {
 
         EditTextLabel4421 {
             id: homeAssistantServerLabel
-            width: 760
+            width: 660
             height: 35
             leftTextAvailableWidth: 450
             leftText: "Server IP:"
     
             onClicked: {
                 qkeyboard.open("Voer het IP adres van Home Assistant in", homeAssistantServerLabel.inputText, saveHomeAssistantServer)
+            }
+        }
+
+        Rectangle {
+            id: sslRect
+            width: 100
+            height: 35
+            color: "transparent"
+            anchors {
+                top: homeAssistantServerLabel.top
+                left: homeAssistantServerLabel.right
+            }
+
+            Text {
+                id: sslLabel
+                width: 50
+                text: "SSL"
+                font.pixelSize: 12
+                color: "Black" 
+                wrapMode: Text.WordWrap
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: 20
+                }
+            }
+
+            Image {
+                id: sslButton
+                width: 50
+                height: 35
+                source: app.homeAssistantSSL ? app.imgButtonOn : app.imgButtonOff
+                smooth: true
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (app.homeAssistantSSL == true) {
+                            app.homeAssistantSSL = false;
+                        } else {
+                            app.homeAssistantSSL = true;
+                        }
+                    }
+                }
             }
         }
 

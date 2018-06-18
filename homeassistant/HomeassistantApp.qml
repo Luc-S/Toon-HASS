@@ -25,11 +25,13 @@ App {
     property string urlPass : ""
 
     property string homeAssistantServer : ""
+    property bool homeAssistantSSL : false
     property string homeAssistantPort : ""
     property string homeAssistantPass : ""
 
     property variant homeAssistantSettingsJson : {
         'Server': "",
+        'SSL': "",
         'Port': "",
         'Pass': ""
     }
@@ -212,6 +214,7 @@ App {
     function saveHomeAssistantSettingsJson() {
         var homeAssistantSettingsJson = {
             "Server" : homeAssistantServer,
+            "SSL" : homeAssistantSSL,
             "Port" : homeAssistantPort,
             "Pass" : homeAssistantPass,
         }
@@ -219,7 +222,12 @@ App {
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeassistant/userSettings.json");
         doc2.send(JSON.stringify(homeAssistantSettingsJson));
 
-        url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
+        
+        if (homeAssistantSSL) {
+            url = "https://" + homeAssistantServer + ":" + homeAssistantPort;
+        } else {
+            url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
+        }
 
         if (homeAssistantPass) {
             urlPass = "?api_password=" + homeAssistantPass;
@@ -482,10 +490,15 @@ App {
         homeAssistantAlarmJson = JSON.parse(alarmFile.read());
 
         homeAssistantServer = homeAssistantSettingsJson ['Server'];
+        homeAssistantSSL = homeAssistantSettingsJson ['SSL'];
         homeAssistantPort = homeAssistantSettingsJson ['Port'];
         homeAssistantPass = homeAssistantSettingsJson ['Pass'];
         
-        url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
+        if (homeAssistantSSL) {
+            url = "https://" + homeAssistantServer + ":" + homeAssistantPort;
+        } else {
+            url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
+        }
         
         if (homeAssistantPass) {
             urlPass = "?api_password=" + homeAssistantPass;
