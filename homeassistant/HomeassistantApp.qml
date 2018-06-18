@@ -25,7 +25,7 @@ App {
     property string urlPass : ""
 
     property string homeAssistantServer : ""
-    property bool homeAssistantSSL : false
+    property string homeAssistantSSL : ""
     property string homeAssistantPort : ""
     property string homeAssistantPass : ""
 
@@ -210,6 +210,36 @@ App {
         source: "./alarm.json"
     }
 
+    //Check if connection to Home Assistant can be made
+    function checkConnection() {
+        var http = new XMLHttpRequest();
+        var checkUrl = ""
+
+        http.onreadystatechange = function() {
+            if (http.readyState == 4) {
+                if (http.status == 200) {
+                    saveHomeAssistantSettingsJson();
+                } else {
+                    message = "Settings not saved. Could not establish connection. ResponseText: '" + http.responseText + "'";
+                    homeAssistantSSL = "no";
+                }
+            }
+        }
+
+        if (homeAssistantSSL == "yes") {
+            checkUrl = "https://" + homeAssistantServer + ":" + homeAssistantPort + "/api/states";
+        } else {
+            checkUrl = "http://" + homeAssistantServer + ":" + homeAssistantPort + "/api/states";
+        }
+
+        if (homeAssistantPass) {
+            checkUrl = checkUrl + "?api_password=" + homeAssistantPass;
+        }
+
+        http.open("GET", checkUrl, true);
+        http.send();
+    }
+
     //Store Home Assistant connection settings
     function saveHomeAssistantSettingsJson() {
         var homeAssistantSettingsJson = {
@@ -222,8 +252,7 @@ App {
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeassistant/userSettings.json");
         doc2.send(JSON.stringify(homeAssistantSettingsJson));
 
-        
-        if (homeAssistantSSL) {
+        if (homeAssistantSSL == "yes") {
             url = "https://" + homeAssistantServer + ":" + homeAssistantPort;
         } else {
             url = "http://" + homeAssistantServer + ":" + homeAssistantPort;
@@ -494,7 +523,7 @@ App {
         homeAssistantPort = homeAssistantSettingsJson ['Port'];
         homeAssistantPass = homeAssistantSettingsJson ['Pass'];
         
-        if (homeAssistantSSL) {
+        if (homeAssistantSSL == "yes") {
             url = "https://" + homeAssistantServer + ":" + homeAssistantPort;
         } else {
             url = "http://" + homeAssistantServer + ":" + homeAssistantPort;

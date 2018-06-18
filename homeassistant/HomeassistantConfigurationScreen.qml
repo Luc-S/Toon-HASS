@@ -173,8 +173,8 @@ Screen {
         homeAssistantSensor7Label.inputText = app.homeAssistantSensor7;
         homeAssistantSensor8Label.inputText = app.homeAssistantSensor8;
         homeAssistantScene1Label.inputText = app.homeAssistantScene1;
-        homeAssistantScene2Label.inputText = app.homeAssistantScene2; 
-        homeAssistantScene3Label.inputText = app.homeAssistantScene3; 
+        homeAssistantScene2Label.inputText = app.homeAssistantScene2;
+        homeAssistantScene3Label.inputText = app.homeAssistantScene3;
         homeAssistantScene4Label.inputText = app.homeAssistantScene4;
         homeAssistantSlider1Label.inputText = app.homeAssistantSlider1;
         homeAssistantSwitch1Label.inputText = app.homeAssistantSwitch1;
@@ -188,8 +188,9 @@ Screen {
 
     //Function to close the configuration form and save the textbox values to the usersettings file
     onCustomButtonClicked: {
+        app.message = "";
         hide();
-        app.saveHomeAssistantSettingsJson();
+        app.checkConnection();
     }
 
     hasBackButton : true
@@ -243,7 +244,7 @@ Screen {
                 id: sslButton
                 width: 50
                 height: 35
-                source: app.homeAssistantSSL ? app.imgButtonOn : app.imgButtonOff
+                source: app.homeAssistantSSL == "yes" ? app.imgButtonOn : app.imgButtonOff
                 smooth: true
                 anchors {
                     right: parent.right
@@ -253,10 +254,10 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (app.homeAssistantSSL == true) {
-                            app.homeAssistantSSL = false;
+                        if (app.homeAssistantSSL == "yes") {
+                            app.homeAssistantSSL = "no";
                         } else {
-                            app.homeAssistantSSL = true;
+                            app.homeAssistantSSL = "yes";
                         }
                     }
                 }
