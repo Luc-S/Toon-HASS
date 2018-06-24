@@ -492,7 +492,12 @@ App {
     function getAlarmInfo() {
         getHomeAssistant(homeAssistantAlarm1, function(data) {
             homeAssistantAlarmState = JSON.parse(data)['state'];
-            homeAssistantAlarmCodeLabel = homeAssistantAlarmState;
+
+            //Don't update alarmcode label when code is being entered
+            var alarmLastChar = homeAssistantAlarmCodeLabel.slice(-1);
+            if (!(/\d/.test(alarmLastChar))) {
+                homeAssistantAlarmCodeLabel = homeAssistantAlarmState;
+            }
         });
     }
 
