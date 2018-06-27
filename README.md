@@ -9,7 +9,9 @@ My main goal was to enable some key features on the Toon thermostat so i didn't 
 - 1 input_number (max 6 options)
 - 1 custom alarm
 
-If you don't enter an alarm object, this space will be left empty. I'm not a developer so I'm sure the code isn't what it should be, if you have any remarks or hints/tips about some pieces of code please let me know.
+The tile will show the first 3 configured sensors. If you don't enter an alarm object, this space will be left empty. 
+
+I'm not a developer so I'm sure the code isn't what it should be, if you have any remarks or hints/tips about some pieces of code please let me know.
 
 
 How to install:
