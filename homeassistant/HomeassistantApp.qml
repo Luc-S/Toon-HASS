@@ -210,6 +210,34 @@ App {
         source: "./alarm.json"
     }
 
+    property string timeStr
+    property string dateStr
+    property int clockTile
+
+    function updateClockInfo() {
+        var now = new Date().getTime();
+        timeStr = i18n.dateTime(now, i18n.time_yes);
+        dateStr = i18n.dateTime(now, i18n.mon_full);
+    }
+
+    Timer {
+        id: datetimeTimer
+        interval: 1000
+        triggeredOnStart: true
+        running: true
+        repeat: true
+        onTriggered: updateClockInfo()
+    }
+
+    Timer {
+        id: datetimeTimer2
+        interval: 60000
+        triggeredOnStart: true
+        running: true
+        repeat: true
+        onTriggered: getSensorInfo()
+    }
+
     //Check if connection to Home Assistant can be made
     function checkConnection() {
         var http = new XMLHttpRequest();
@@ -247,6 +275,7 @@ App {
             "SSL" : homeAssistantSSL,
             "Port" : homeAssistantPort,
             "Pass" : homeAssistantPass,
+            "Clock" : clockTile,
         }
         var doc2 = new XMLHttpRequest();
         doc2.open("PUT", "file:///HCBv2/qml/apps/homeassistant/userSettings.json");
@@ -527,6 +556,7 @@ App {
         homeAssistantSSL = homeAssistantSettingsJson ['SSL'];
         homeAssistantPort = homeAssistantSettingsJson ['Port'];
         homeAssistantPass = homeAssistantSettingsJson ['Pass'];
+        clockTile = homeAssistantSettingsJson ['Clock'];
         
         if (homeAssistantSSL == "yes") {
             url = "https://" + homeAssistantServer + ":" + homeAssistantPort;

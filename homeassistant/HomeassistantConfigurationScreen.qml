@@ -206,9 +206,9 @@ Screen {
 
         EditTextLabel4421 {
             id: homeAssistantServerLabel
-            width: 660
+            width: 560
             height: 35
-            leftTextAvailableWidth: 450
+            leftTextAvailableWidth: 250
             leftText: "Server IP:"
     
             onClicked: {
@@ -218,7 +218,7 @@ Screen {
 
         Rectangle {
             id: sslRect
-            width: 100
+            width: 200
             height: 35
             color: "transparent"
             anchors {
@@ -228,7 +228,7 @@ Screen {
 
             Text {
                 id: sslLabel
-                width: 50
+                width: 150
                 text: "SSL"
                 font.pixelSize: 12
                 color: "Black" 
@@ -266,9 +266,9 @@ Screen {
 
         EditTextLabel4421 {
             id: homeAssistantPortLabel
-            width: 760
+            width: 560
             height: 35
-            leftTextAvailableWidth: 450
+            leftTextAvailableWidth: 250
             leftText: "Poort:"
             anchors {
                 top: homeAssistantServerLabel.bottom
@@ -282,11 +282,59 @@ Screen {
             }
         }
 
+        Rectangle {
+            id: clockRect
+            width: 200
+            height: 35
+            color: "transparent"
+            anchors {
+                top: homeAssistantPortLabel.top
+                left: homeAssistantPortLabel.right
+            }
+
+            Text {
+                id: clockLabel
+                width: 150
+                text: "Clock widget"
+                font.pixelSize: 12
+                color: "Black" 
+                wrapMode: Text.WordWrap
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: 20
+                }
+            }
+
+            Image {
+                id: clockButton
+                width: 50
+                height: 35
+                source: app.clockTile ? app.imgButtonOn : app.imgButtonOff
+                smooth: true
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (app.clockTile) {
+                            app.clockTile = 0;
+                        } else {
+                            app.clockTile = 1;
+                        }
+                    }
+                }
+            }
+        }
+
         EditTextLabel4421 {
             id: homeAssistantPassLabel
-            width: 760
+            width: 560
             height: 35
-            leftTextAvailableWidth: 450
+            leftTextAvailableWidth: 250
             leftText: "Pass:"
             anchors {
                 top: homeAssistantPortLabel.bottom
