@@ -9,7 +9,7 @@ My main goal was to enable some key features on the Toon thermostat so i didn't 
 - 1 input_number (max 6 options)
 - 1 custom alarm
 
-I know there is still some space left but I'm going to create a little numpad to control my alarm system. As this alarm system is pretty uncommon I didn't include it in this github (also I haven't built it yet :) ). I'm not a developer so I'm sure the code isn't what it should be, if you have any remarks or hints/tips about some pieces of code please let me know.
+If you don't enter an alarm object, this space will be left empty. I'm not a developer so I'm sure the code isn't what it should be, if you have any remarks or hints/tips about some pieces of code please let me know.
 
 
 How to install:
@@ -35,4 +35,4 @@ How to install:
 
 Friendly names configured in your Home Assistant config are used to show the objects on the Toon. So make sure all items you want Toon to show have a friendly name. 
 
-All objects are refreshed upon opening the app, pressing the "Opslaan" button on the configuration screen and by pressing the Home Assistant image on the app home screen (top right). I'm not a fan of endless loops so I haven't created an automatic update function.
+All objects are refreshed every minute (because of the sensor info located on the tile), upon opening the app, pressing the "Opslaan" button on the configuration screen and by pressing the Home Assistant image on the app home screen (top right).
