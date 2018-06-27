@@ -25,6 +25,8 @@ How to install:
 
 ![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/tile.png)
 
+![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/tile_dim.png)
+
 5. When starting the app for the first time the screen will be pretty much empty, click on "Instellingen" to configure the app
 6. On the configuration page enter the Home Assistant connection info and entity_id's you want to be shown (press the left/right arrows to scroll through sensors/scenes/switches)
 
