@@ -13,6 +13,36 @@ Screen {
         app.getSliderInfo();
         app.getAlarmInfo();
         
+		for(var i = 0; i < app.homeAssistantSwitches.length;i++){
+			var switchComponent = Qt.createComponent("HomeAssistantSwitch.qml");
+			if(switchComponent.status == Component.Ready) {
+				switchComponent.switchRect.homeAssistantSwitch.text: JSON.parse(app.homeAssistantSwitchesInfo[i])['attributes']['friendly_name'];
+				switchComponent.switchRect.homeAssistantSwitchButton.source: JSON.parse(app.homeAssistantSwitchesInfo[i])['state'] == "on" ? app.imgButtonOn : app.imgButtonOff;
+				switchComponent.switchRect.homeAssistantSwitchMouseArea.onClicked: {
+                    if (JSON.parse(app.homeAssistantSwitchesInfo[i])['state'] == "off") {
+                        app.setHomeAssistant("switch", app.homeAssistantSwitches[i], 1);
+                    } else if (JSON.parse(app.homeAssistantSwitchesInfo[i])['state'] == "on") {
+                        app.setHomeAssistant("switch", app.homeAssistantSwitches[i], 0);
+                    }
+                }
+			}
+		}
+		
+		for(var i = 0; i < app.homeAssistantSensors.length;i++){
+			var switchComponent = Qt.createComponent("HomeAssistantSwitch.qml");
+			if(switchComponent.status == Component.Ready) {
+				switchComponent.switchRect.homeAssistantSwitch.text: JSON.parse(app.homeAssistantSwitchesInfo[i])['attributes']['friendly_name'];
+				switchComponent.switchRect.homeAssistantSwitchButton.source: JSON.parse(app.homeAssistantSwitchesInfo[i])['state'] == "on" ? app.imgButtonOn : app.imgButtonOff;
+				switchComponent.switchRect.homeAssistantSwitchMouseArea.onClicked: {
+                    if (JSON.parse(app.homeAssistantSwitchesInfo[i])['state'] == "off") {
+                        app.setHomeAssistant("switch", app.homeAssistantSwitches[i], 1);
+                    } else if (JSON.parse(app.homeAssistantSwitchesInfo[i])['state'] == "on") {
+                        app.setHomeAssistant("switch", app.homeAssistantSwitches[i], 0);
+                    }
+                }
+			}
+		}
+		
         if (app.homeAssistantSensor1) {
             homeAssistantSensor1Name.visible = true;
             homeAssistantSensor1Value.visible = true;
@@ -220,7 +250,7 @@ Screen {
         }
 
         Rectangle {
-            id: sensorRect1
+            id: sensorRectNames
             width: 150
             color: "transparent"
             anchors {
@@ -838,228 +868,17 @@ Screen {
     }
 
 
-    Rectangle {
-        id: switchRect1
-        width: 250
+    RowLayout{
+		id: rowLayoutSwitches
+		width: 250
         color: "transparent"
         anchors {
             top: switchTitle.bottom
             left: switchTitle.left
             topMargin: 0
         }
+		spacing: 6
 
-        Text {
-            id: homeAssistantSwitch1Name
-            width: 200
-            text: JSON.parse(app.homeAssistantSwitch1Info)['attributes']['friendly_name'] 
-            font.pixelSize: 12
-            color: "Black" 
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                topMargin: 13
-            }
-        }
-
-        Image {
-            id: homeAssistantSwitch1Button
-            width: 50
-            height: 36
-            source: JSON.parse(app.homeAssistantSwitch1Info)['state'] == "on" ? app.imgButtonOn : app.imgButtonOff
-            smooth: true
-            anchors {
-                right: switchRect1.right
-                verticalCenter: switchRect1.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (JSON.parse(app.homeAssistantSwitch1Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch1, 1);
-                    } else if (JSON.parse(app.homeAssistantSwitch1Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch1, 0);
-                    }
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id: switchRect2
-        anchors.top: switchRect1.bottom
-        anchors.left: switchRect1.left
-        width: 250 
-        color: "transparent"
-
-        Text {
-            id: homeAssistantSwitch2Name
-            width: 200
-            text: JSON.parse(app.homeAssistantSwitch2Info)['attributes']['friendly_name']
-            font.pixelSize: 12
-            color: "Black" 
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                topMargin: 13
-            }
-        }
-
-        Image {
-            id: homeAssistantSwitch2Button;
-            width: 50
-            height: 36
-            source: JSON.parse(app.homeAssistantSwitch2Info)['state'] == "on" ? app.imgButtonOn : app.imgButtonOff
-            smooth: true
-
-            anchors {
-                right: switchRect2.right
-                verticalCenter: switchRect2.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (JSON.parse(app.homeAssistantSwitch2Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch2, 1);
-                    } else if (JSON.parse(app.homeAssistantSwitch2Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch2, 0);
-                    }
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id: switchRect3
-        anchors.top: switchRect2.bottom
-        anchors.left: switchRect2.left
-        width: 250
-        color: "transparent"
-
-        Text {
-            id: homeAssistantSwitch3Name
-            width: 200
-            text: JSON.parse(app.homeAssistantSwitch3Info)['attributes']['friendly_name']
-            font.pixelSize: 12
-            color: "Black"
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                topMargin: 13
-            }
-        }
-
-        Image {
-            id: homeAssistantSwitch3Button;
-            width: 50
-            height: 36
-            source: JSON.parse(app.homeAssistantSwitch3Info)['state'] == "on" ? app.imgButtonOn : app.imgButtonOff
-            smooth: true
-            anchors {
-                right: switchRect3.right
-                verticalCenter: switchRect3.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (JSON.parse(app.homeAssistantSwitch3Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch3, 1);
-                    } else if (JSON.parse(app.homeAssistantSwitch3Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch3, 0);
-                    }
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id: switchRect4
-        anchors.top: switchRect3.bottom
-        anchors.left: switchRect3.left
-        width: 250
-        color: "transparent"
-
-        Text {
-            id: homeAssistantSwitch4Name
-            width: 200
-            text: JSON.parse(app.homeAssistantSwitch4Info)['attributes']['friendly_name']
-            font.pixelSize: 12
-            color: "Black" 
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                topMargin: 13
-            }
-        }
-
-        Image {
-            id: homeAssistantSwitch4Button;
-            width: 50
-            height: 36
-            source: JSON.parse(app.homeAssistantSwitch4Info)['state'] == "on" ? app.imgButtonOn : app.imgButtonOff
-            smooth: true
-            anchors {
-                right: switchRect4.right
-                verticalCenter: switchRect4.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (JSON.parse(app.homeAssistantSwitch4Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch4, 1);
-                    } else if (JSON.parse(app.homeAssistantSwitch4Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch4, 0);
-                    }
-                }
-            }
-        }
-    }
-
-    Rectangle {
-        id: switchRect5
-        anchors.top: switchRect4.bottom
-        anchors.left: switchRect4.left
-        width: 250
-        color: "transparent"
-
-        Text {
-            id: homeAssistantSwitch5Name
-            width: 200
-            text: JSON.parse(app.homeAssistantSwitch5Info)['attributes']['friendly_name']  
-            font.pixelSize: 12
-            color: "Black" 
-            wrapMode: Text.WordWrap
-            anchors {
-                top: parent.top
-                topMargin: 13
-            }
-        }
-
-        Image {
-            id: homeAssistantSwitch5Button;
-            width: 50
-            height: 36
-            source: JSON.parse(app.homeAssistantSwitch5Info)['state'] == "on" ? app.imgButtonOn : app.imgButtonOff
-            smooth: true
-            anchors {
-                right: switchRect5.right
-                verticalCenter: switchRect5.verticalCenter
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch5, 1);
-                    } else if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch5, 0);
-                    }
-                }
-            }
-        }
     }
 
     //Alarm section
