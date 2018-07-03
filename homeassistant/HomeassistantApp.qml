@@ -41,15 +41,8 @@ App {
         source: "./userSettings.json"
     }
 
-    property string homeAssistantSensor1 : ""
-    property string homeAssistantSensor2 : ""
-    property string homeAssistantSensor3 : ""
-    property string homeAssistantSensor4 : ""
-    property string homeAssistantSensor5 : ""
-    property string homeAssistantSensor6 : ""
-    property string homeAssistantSensor7 : ""
-    property string homeAssistantSensor8 : ""
-
+	property string homeAssistantSensors : ["","","","","","","",""]
+   
     property variant homeAssistantSensorsJson : {
         'Sensor1': "",
         'Sensor2': "",
@@ -65,16 +58,9 @@ App {
         id: sensorFile
         source: "./sensors.json"
     }
-
-    property variant homeAssistantSensor1Info : []
-    property variant homeAssistantSensor2Info : []
-    property variant homeAssistantSensor3Info : []
-    property variant homeAssistantSensor4Info : []
-    property variant homeAssistantSensor5Info : []
-    property variant homeAssistantSensor6Info : []
-    property variant homeAssistantSensor7Info : []
-    property variant homeAssistantSensor8Info : []
-
+	
+	property variant homeAssistantSensorsInfo = [[],[],[],[],[],[],[],[]]
+    
     property variant homeAssistantSensorInfoJson : {
         'Sensor1Info': "",
         'Sensor2Info': "",
@@ -300,16 +286,16 @@ App {
 
     //Store sensor settings
     function saveHomeAssistantSensorsJson() {
+		
         var homeAssistantSensorsJson = {
-            "Sensor1" : homeAssistantSensor1,
-            "Sensor2" : homeAssistantSensor2,
-            "Sensor3" : homeAssistantSensor3,
-            "Sensor4" : homeAssistantSensor4,
-            "Sensor5" : homeAssistantSensor5,
-            "Sensor6" : homeAssistantSensor6,
-            "Sensor7" : homeAssistantSensor7,
-            "Sensor8" : homeAssistantSensor8,
+			"Sensors" : homeAssistantSensors.length
         }
+		
+		// Add Sensor items based on the array size
+		for(var i = 0; i < homeAssistantSensors.length; i++){
+			homeAssistantSensorsJson["Sensor%1".arg(i)] = homeAssistantSensors[i];
+		}
+		
         var doc3 = new XMLHttpRequest();
         doc3.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sensors.json");
         doc3.send(JSON.stringify(homeAssistantSensorsJson));
@@ -319,52 +305,26 @@ App {
 
     //Retrieve sensor information from Home Assistant
     function getSensorInfo() {
-        getHomeAssistant(homeAssistantSensor1, function(data) {
-            homeAssistantSensor1Info = data;
-
-            getHomeAssistant(homeAssistantSensor2, function(data) {
-                homeAssistantSensor2Info = data;
-
-                getHomeAssistant(homeAssistantSensor3, function(data) {
-                    homeAssistantSensor3Info = data;
-
-                    getHomeAssistant(homeAssistantSensor4, function(data) {
-                        homeAssistantSensor4Info = data;
-
-                        getHomeAssistant(homeAssistantSensor5, function(data) {
-                            homeAssistantSensor5Info = data;
-
-                            getHomeAssistant(homeAssistantSensor6, function(data) {
-                                homeAssistantSensor6Info = data;
-
-                                getHomeAssistant(homeAssistantSensor7, function(data) {
-                                    homeAssistantSensor7Info = data;
-
-                                    getHomeAssistant(homeAssistantSensor8, function(data) {
-                                        homeAssistantSensor8Info = data;
-                                        saveHomeAssistantSensorInfoJson();
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });  
-        }); 
+		for(var i = 0; i < homeAssistantSensorsInfo.length; i++){
+			getHomeAssistant(homeAssistantSensors["Sensor%1".arg(i)], function(data){
+				homeAssistantSensorsInfo[i] = data;
+			}
+		}
+		
+		saveHomeAssistantSensorInfoJson();         
     }
     
     //Store sensor information retrieved from Home Assistant
     function saveHomeAssistantSensorInfoJson() {
-        var homeAssistantSensorInfoJson = {
-            "Sensor1Info" : homeAssistantSensor1Info,
-            "Sensor2Info" : homeAssistantSensor2Info,
-            "Sensor3Info" : homeAssistantSensor3Info,
-            "Sensor4Info" : homeAssistantSensor4Info,
-            "Sensor5Info" : homeAssistantSensor5Info,
-            "Sensor6Info" : homeAssistantSensor6Info,
-            "Sensor7Info" : homeAssistantSensor7Info,
-            "Sensor8Info" : homeAssistantSensor8Info,
+		var homeAssistantSensorInfoJson = {
+			"Sensors" : homeAssistantSensorsInfo.length
         }
+		
+		// Add Sensor items based on the array size
+		for(var i = 0; i < homeAssistantSensors.length; i++){
+			homeAssistantSensorsJson["Sensor%1Info".arg(i)] = homeAssistantSensorsInfo[i];
+		}
+        
         var doc4 = new XMLHttpRequest();
         doc4.open("PUT", "file:///HCBv2/qml/apps/homeassistant/sensorInfo.json");
         doc4.send(JSON.stringify(homeAssistantSensorInfoJson));
@@ -597,24 +557,17 @@ App {
         homeAssistantSwitch4Info = homeAssistantSwitchInfoJson ['Switch4Info'];
         homeAssistantSwitch5Info = homeAssistantSwitchInfoJson ['Switch5Info'];
         
-        homeAssistantSensor1 = homeAssistantSensorsJson ['Sensor1'];
-        homeAssistantSensor2 = homeAssistantSensorsJson ['Sensor2'];
-        homeAssistantSensor3 = homeAssistantSensorsJson ['Sensor3'];
-        homeAssistantSensor4 = homeAssistantSensorsJson ['Sensor4'];
-        homeAssistantSensor5 = homeAssistantSensorsJson ['Sensor5'];
-        homeAssistantSensor6 = homeAssistantSensorsJson ['Sensor6'];
-        homeAssistantSensor7 = homeAssistantSensorsJson ['Sensor7'];
-        homeAssistantSensor8 = homeAssistantSensorsJson ['Sensor8'];
-        
-        homeAssistantSensor1Info = homeAssistantSensorInfoJson ['Sensor1Info'];
-        homeAssistantSensor2Info = homeAssistantSensorInfoJson ['Sensor2Info'];
-        homeAssistantSensor3Info = homeAssistantSensorInfoJson ['Sensor3Info'];
-        homeAssistantSensor4Info = homeAssistantSensorInfoJson ['Sensor4Info'];
-        homeAssistantSensor5Info = homeAssistantSensorInfoJson ['Sensor5Info'];
-        homeAssistantSensor6Info = homeAssistantSensorInfoJson ['Sensor6Info'];
-        homeAssistantSensor7Info = homeAssistantSensorInfoJson ['Sensor7Info'];
-        homeAssistantSensor8Info = homeAssistantSensorInfoJson ['Sensor8Info'];
-
+		// Allocate Sensor array
+		for(var i = 0; i < homeAssistantSensorsJson["Sensors"]; i++){
+			homeAssistantSensors["Sensor%1".arg(i)"] = homeAssistantSensorsJson["Sensor%1".arg(i)"];
+		}
+		
+		
+        // Allocate SensorInfo array
+		for(var i = 0; i < homeAssistantSensorInfoJson["Sensors"]; i++){
+			homeAssistantSensorsInfo["Sensor%1Info".arg(i)"] = homeAssistantSensorInfoJson["Sensor%1Info".arg(i)"];
+		}
+		
         homeAssistantAlarm1 = homeAssistantAlarmJson ['Alarm1'];
         homeAssistantAlarm2 = homeAssistantAlarmJson ['Code'];
 

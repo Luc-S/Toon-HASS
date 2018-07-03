@@ -371,7 +371,8 @@ Screen {
             color: "Black"
             wrapMode: Text.WordWrap
         }
-
+		
+		// Make this dynamic!
         EditTextLabel4421 {
             id: homeAssistantSensor1Label
             width: 295
