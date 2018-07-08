@@ -288,7 +288,7 @@ App {
         }
 
         if (homeAssistantPass) {
-            urlPass = "?api_password=" + homeAssistantPass;
+            urlPass = "?api_password=" + encodeURIComponent(homeAssistantPass);
         }
 
         saveHomeAssistantSensorsJson();
