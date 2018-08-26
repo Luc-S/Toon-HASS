@@ -649,23 +649,25 @@ App {
         http.send();
     }
     
-    function setHomeAssistant(type, entity, state) {
+    function setHomeAssistant(entity, state) {
         var http = new XMLHttpRequest();
         var fullUrl = "";
         var params = '{"entity_id": "' + entity + '"}';
+        var type = entity.substr(0, entity.indexOf('.'));
 
         switch(type) {
             case "scene":
                 fullUrl = url + "/api/services/scene/turn_on";
                 break;
             case "switch":
-                fullUrl = state ? url + "/api/services/switch/turn_on" : url + "/api/services/switch/turn_off";
+            case "input_boolean":
+                fullUrl = state ? url + "/api/services/" + type + "/turn_on" : url + "/api/services/" + type + "/turn_off";
                 break;
-            case "slider":
+            case "input_number":
                 params = '{"entity_id": "' + entity + '", "value":"' + state + '"}';
                 fullUrl = url + "/api/services/input_number/set_value";
                 break;
-            case "alarm":
+            case "alarm_control_panel":
                 params = state ? '{"entity_id": "' + entity + '", "code":"' + homeAssistantAlarm2 + '"}' : '{"entity_id": "' + entity + '", "code":"' + homeAssistantAlarmCode + '"}';
                 fullUrl = state ? url + "/api/services/alarm_control_panel/alarm_arm_away" : url + "/api/services/alarm_control_panel/alarm_disarm";
                 break;

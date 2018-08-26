@@ -486,7 +486,7 @@ Screen {
 
             bottomClickMargin: 3
             onClicked: {
-                app.setHomeAssistant("scene", app.homeAssistantScene1);
+                app.setHomeAssistant(app.homeAssistantScene1);
             }
         }
 
@@ -504,7 +504,7 @@ Screen {
 
             bottomClickMargin: 3
             onClicked: {
-                app.setHomeAssistant("scene", app.homeAssistantScene2);
+                app.setHomeAssistant(app.homeAssistantScene2);
             }
         }
 
@@ -522,7 +522,7 @@ Screen {
 
             bottomClickMargin: 3
             onClicked: {
-                        app.setHomeAssistant("scene", app.homeAssistantScene3);
+                        app.setHomeAssistant(app.homeAssistantScene3);
             }
         }
 
@@ -540,7 +540,7 @@ Screen {
 
             bottomClickMargin: 3
             onClicked: {
-                app.setHomeAssistant("scene", app.homeAssistantScene4);
+                app.setHomeAssistant(app.homeAssistantScene4);
             }
         }
     }
@@ -616,7 +616,7 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption1Label.text);
+                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption1Label.text);
                         }
                     }
                 }
@@ -656,7 +656,7 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption2Label.text);
+                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption2Label.text);
                         }
                     }
                 }
@@ -696,7 +696,7 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption3Label.text);
+                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption3Label.text);
                         }
                     }
                 }
@@ -736,7 +736,7 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption4Label.text);
+                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption4Label.text);
                         }
                     }
                 }
@@ -776,7 +776,7 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption5Label.text);
+                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption5Label.text);
                         }
                     }
                 }
@@ -816,7 +816,7 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            app.setHomeAssistant("slider", app.homeAssistantSlider1, sliderOption6Label.text);
+                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption6Label.text);
                         }
                     }
                 }
@@ -876,9 +876,9 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     if (JSON.parse(app.homeAssistantSwitch1Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch1, 1);
+                        app.setHomeAssistant(app.homeAssistantSwitch1, 1);
                     } else if (JSON.parse(app.homeAssistantSwitch1Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch1, 0);
+                        app.setHomeAssistant(app.homeAssistantSwitch1, 0);
                     }
                 }
             }
@@ -921,9 +921,9 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     if (JSON.parse(app.homeAssistantSwitch2Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch2, 1);
+                        app.setHomeAssistant(app.homeAssistantSwitch2, 1);
                     } else if (JSON.parse(app.homeAssistantSwitch2Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch2, 0);
+                        app.setHomeAssistant(app.homeAssistantSwitch2, 0);
                     }
                 }
             }
@@ -965,9 +965,9 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     if (JSON.parse(app.homeAssistantSwitch3Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch3, 1);
+                        app.setHomeAssistant(app.homeAssistantSwitch3, 1);
                     } else if (JSON.parse(app.homeAssistantSwitch3Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch3, 0);
+                        app.setHomeAssistant(app.homeAssistantSwitch3, 0);
                     }
                 }
             }
@@ -1009,9 +1009,9 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     if (JSON.parse(app.homeAssistantSwitch4Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch4, 1);
+                        app.setHomeAssistant(app.homeAssistantSwitch4, 1);
                     } else if (JSON.parse(app.homeAssistantSwitch4Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch4, 0);
+                        app.setHomeAssistant(app.homeAssistantSwitch4, 0);
                     }
                 }
             }
@@ -1053,9 +1053,9 @@ Screen {
                 anchors.fill: parent
                 onClicked: {
                     if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "off") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch5, 1);
+                        app.setHomeAssistant(app.homeAssistantSwitch5, 1);
                     } else if (JSON.parse(app.homeAssistantSwitch5Info)['state'] == "on") {
-                        app.setHomeAssistant("switch", app.homeAssistantSwitch5, 0);
+                        app.setHomeAssistant(app.homeAssistantSwitch5, 0);
                     }
                 }
             }
@@ -1587,9 +1587,9 @@ Screen {
                     app.homeAssistantAlarmCodeLabel = "****";
 
                     if (app.homeAssistantAlarmCode.length > 0) {
-                        app.setHomeAssistant("alarm", app.homeAssistantAlarm1, 0);
+                        app.setHomeAssistant(app.homeAssistantAlarm1, 0);
                     } else {
-                        app.setHomeAssistant("alarm", app.homeAssistantAlarm1, 1);
+                        app.setHomeAssistant(app.homeAssistantAlarm1, 1);
                     }
                 }
             }
