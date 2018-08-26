@@ -261,7 +261,7 @@ App {
         }
 
         if (homeAssistantPass) {
-            checkUrl = checkUrl + "?api_password=" + homeAssistantPass;
+            checkUrl = checkUrl + "?api_password=" + encodeURIComponent(homeAssistantPass);
         }
 
         http.open("GET", checkUrl, true);
@@ -288,7 +288,7 @@ App {
         }
 
         if (homeAssistantPass) {
-            urlPass = "?api_password=" + homeAssistantPass;
+            urlPass = "?api_password=" + encodeURIComponent(homeAssistantPass);
         }
 
         saveHomeAssistantSensorsJson();
