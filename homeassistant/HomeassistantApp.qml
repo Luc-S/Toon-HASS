@@ -131,7 +131,7 @@ App {
     property real homeAssistantSlider1Min : 0.0
     property real homeAssistantSlider1Step : 0.0
     property int homeAssistantSlider1Options : 0
-    property string imgNotSelected : "./drawables/notSelected.png"
+    property string imgNotSelected : "./drawables/notselected.png"
     property string imgSelected : "./drawables/selected.png"
 
     property variant homeAssistantSlidersJson : {
