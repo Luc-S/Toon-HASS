@@ -1,4 +1,4 @@
-import QtQuick 1.1
+import QtQuick 2.1
 import qb.components 1.0
 import qb.base 1.0;
 
@@ -8,7 +8,7 @@ App {
     id: homeassistantApp
 
     property url tileUrl : "HomeassistantTile.qml";
-    property url thumbnailIcon: "drawables/homeAssistant.png";
+    property url thumbnailIcon: "./drawables/homeAssistant.png";
 
     property HomeassistantConfigurationScreen homeAssistantConfigurationScreen
     property url homeAssistantConfigurationScreenUrl : "HomeassistantConfigurationScreen.qml"
@@ -195,8 +195,6 @@ App {
     property string homeAssistantAlarmCodeLabel : ""
     property string homeAssistantAlarmCode : ""
     property string homeAssistantAlarmState : ""
-    property string imgLocked : "./drawables/dialpadLocked.png"
-    property string imgUnlocked : "./drawables/dialpadUnlocked.png"
     property string homeAssistantAlarm1 : ""
     property string homeAssistantAlarm2 : ""
 
@@ -453,6 +451,51 @@ App {
         if (homeAssistantSlider1Options > 0) {
             sliderBtnWidth = Math.round(245 / homeAssistantSlider1Options);
         }
+
+        setSliderObject();
+    }
+
+    function setSliderObject() {
+        getHomeAssistant(homeAssistantSlider1, function(data) {
+            homeAssistantSlider1Info = data;
+            var x = JSON.parse(homeAssistantSlider1Info)['state'];
+
+            if (x == homeAssistantSlider1Min) {
+                homeAssistantScreen.sliderA.sliderR.sliderR1.state = "on";
+            } else {
+                homeAssistantScreen.sliderA.sliderR.sliderR1.state = "off";
+            }
+
+            if (x == (homeAssistantSlider1Min + homeAssistantSlider1Step)) {
+                homeAssistantScreen.sliderA.sliderR.sliderR2.state = "on";
+            } else {
+                homeAssistantScreen.sliderA.sliderR.sliderR2.state = "off";
+            }
+
+            if (x == (homeAssistantSlider1Min + (homeAssistantSlider1Step * 2))) {
+                homeAssistantScreen.sliderA.sliderR.sliderR3.state = "on";
+            } else {
+                homeAssistantScreen.sliderA.sliderR.sliderR3.state = "off";
+            }
+
+            if (x == (homeAssistantSlider1Min + (homeAssistantSlider1Step * 3))) {
+                homeAssistantScreen.sliderA.sliderR.sliderR4.state = "on";
+            } else {
+                homeAssistantScreen.sliderA.sliderR.sliderR4.state = "off";
+            }
+
+            if (x == (homeAssistantSlider1Min + (homeAssistantSlider1Step * 4))) {
+                homeAssistantScreen.sliderA.sliderR.sliderR5.state = "on";
+            } else {
+                homeAssistantScreen.sliderA.sliderR.sliderR5.state = "off";
+            }
+
+            if (x == (homeAssistantSlider1Min + (homeAssistantSlider1Step * 5))) {
+                homeAssistantScreen.sliderA.sliderR.sliderR6.state = "on";
+            } else {
+                homeAssistantScreen.sliderA.sliderR.sliderR6.state = "off";
+            }
+        });
     }
 
     //Store switch settings
@@ -473,38 +516,28 @@ App {
     function getSwitchInfo() {
         getHomeAssistant(homeAssistantSwitch1, function(data) {
             homeAssistantSwitch1Info = data;
-
-            getHomeAssistant(homeAssistantSwitch2, function(data) {
-                homeAssistantSwitch2Info = data;
-
-                getHomeAssistant(homeAssistantSwitch3, function(data) {
-                    homeAssistantSwitch3Info = data;
-
-                    getHomeAssistant(homeAssistantSwitch4, function(data) {
-                        homeAssistantSwitch4Info = data;
-
-                        getHomeAssistant(homeAssistantSwitch5, function(data) {
-                            homeAssistantSwitch5Info = data;
-                            saveHomeAssistantSwitchInfoJson();
-                        });
-                    });
-                });
-            });  
+            homeAssistantScreen.switch1R.switch1.state = JSON.parse(homeAssistantSwitch1Info)['state'];
         });
-    }
 
-    //Store switch information retrieved from Home Assistant
-    function saveHomeAssistantSwitchInfoJson() {
-        var homeAssistantSwitchInfoJson = {
-            "Switch1Info" : homeAssistantSwitch1Info,
-            "Switch2Info" : homeAssistantSwitch2Info,
-            "Switch3Info" : homeAssistantSwitch3Info,
-            "Switch4Info" : homeAssistantSwitch4Info,
-            "Switch5Info" : homeAssistantSwitch5Info,
-        }
-        var doc10 = new XMLHttpRequest();
-        doc10.open("PUT", "file:///HCBv2/qml/apps/homeassistant/switchInfo.json");
-        doc10.send(JSON.stringify(homeAssistantSwitchInfoJson));
+        getHomeAssistant(homeAssistantSwitch2, function(data) {
+            homeAssistantSwitch2Info = data;
+            homeAssistantScreen.switch2R.switch2.state = JSON.parse(homeAssistantSwitch2Info)['state'];
+        });
+
+        getHomeAssistant(homeAssistantSwitch3, function(data) {
+            homeAssistantSwitch3Info = data;
+            homeAssistantScreen.switch3R.switch3.state = JSON.parse(homeAssistantSwitch3Info)['state'];
+        });
+
+        getHomeAssistant(homeAssistantSwitch4, function(data) {
+            homeAssistantSwitch4Info = data;
+            homeAssistantScreen.switch4R.switch4.state = JSON.parse(homeAssistantSwitch4Info)['state'];
+        });
+
+        getHomeAssistant(homeAssistantSwitch5, function(data) {
+            homeAssistantSwitch5Info = data;
+            homeAssistantScreen.switch5R.switch5.state = JSON.parse(homeAssistantSwitch5Info)['state'];
+        });
     }
 
     //Store alarm settings
@@ -521,6 +554,12 @@ App {
     function getAlarmInfo() {
         getHomeAssistant(homeAssistantAlarm1, function(data) {
             homeAssistantAlarmState = JSON.parse(data)['state'];
+
+            if (homeAssistantAlarmState == "disarmed") {
+                homeAssistantScreen.alarmR.alarmREnter.state = "off";
+            } else {
+                homeAssistantScreen.alarmR.alarmREnter.state = "on";
+            }
 
             //Don't update alarmcode label when code is being entered
             var alarmLastChar = homeAssistantAlarmCodeLabel.slice(-1);
@@ -625,14 +664,11 @@ App {
         var fullUrl = "";
         var urlExtension = entity ? "/api/states/" + entity : "/api/states";
 
-        http.onreadystatechange = function() { // Call a function when the state changes.
+        http.onreadystatechange = function() {
             if (http.readyState == 4) {
-                //message = "1: " + http.readyState;
                 if (http.status == 200) {
-                    //message = "2: " + http.responseText;
                     callback(http.responseText);
                 } else {
-                    //message = "3: " + http.responseText;
                     callback(http.status);
                 }
             }
@@ -660,6 +696,8 @@ App {
                 fullUrl = url + "/api/services/scene/turn_on";
                 break;
             case "switch":
+                fullUrl = state ? url + "/api/services/" + type + "/turn_on" : url + "/api/services/" + type + "/turn_off";
+                break;
             case "input_boolean":
                 fullUrl = state ? url + "/api/services/" + type + "/turn_on" : url + "/api/services/" + type + "/turn_off";
                 break;
@@ -675,17 +713,9 @@ App {
                 pass
         }
 
-        http.onreadystatechange = function(type, entity) { // Call a function when the state changes.
-            if (http.readyState == 4) {
-                if (http.status == 200) {
-                    return true;
-                } else {
-                    var error = "Commando mislukt: " + http.status;
-                    return error;
-                }
-            }
+        http.onreadystatechange = function() {
             getSwitchInfo();
-            getSliderInfo();
+            setSliderObject();
             getAlarmInfo();
             alarmInputReset();
         }
