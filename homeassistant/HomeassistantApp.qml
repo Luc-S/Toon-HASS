@@ -660,6 +660,11 @@ App {
     }
 
     function getHomeAssistant(entity, callback) {
+        if (entity == "") {
+            callback("");
+            return;
+        }
+
         var http = new XMLHttpRequest();
         var fullUrl = "";
         var urlExtension = entity ? "/api/states/" + entity : "/api/states";

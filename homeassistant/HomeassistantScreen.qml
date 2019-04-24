@@ -232,7 +232,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor1Name
-                text: JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor1 ? JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -243,7 +243,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor2Name
-                text: JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor2 ? JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -254,7 +254,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor3Name
-                text: JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor3 ? JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -265,7 +265,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor4Name
-                text: JSON.parse(app.homeAssistantSensor4Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor4 ? JSON.parse(app.homeAssistantSensor4Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -286,7 +286,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor1Value;
-                text: JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']
+                text: app.homeAssistantSensor1 ? (JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']) : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -299,7 +299,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor2Value;
-                text: JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state']
+                text: app.homeAssistantSensor2 ? (JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state']) : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap 
@@ -347,7 +347,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor5Name
-                text: JSON.parse(app.homeAssistantSensor5Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor5 ? JSON.parse(app.homeAssistantSensor5Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -358,7 +358,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor6Name
-                text: JSON.parse(app.homeAssistantSensor6Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor6 ? JSON.parse(app.homeAssistantSensor6Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -369,7 +369,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor7Name
-                text: JSON.parse(app.homeAssistantSensor7Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor7 ? JSON.parse(app.homeAssistantSensor7Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -380,7 +380,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor8Name
-                text: JSON.parse(app.homeAssistantSensor8Info)['attributes']['friendly_name'] 
+                text: app.homeAssistantSensor8 ? JSON.parse(app.homeAssistantSensor8Info)['attributes']['friendly_name'] : ""
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap

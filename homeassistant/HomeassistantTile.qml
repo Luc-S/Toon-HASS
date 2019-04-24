@@ -80,7 +80,7 @@ Tile {
 
 		Text {
 			id: lblSensor1
-			text: JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name']
+			text: app.homeAssistantSensor1 ? JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name'] : ""
 			color: colors.clockTileColor
 			height: 20
 			width: tileGrid.width - 40
@@ -95,7 +95,7 @@ Tile {
 
 		Text {
 			id: valueSensor1
-			text: JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']
+			text: app.homeAssistantSensor1 ? (JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']) : ""
 			color: colors.clockTileColor
 			height: 20
 			width: 40
@@ -111,7 +111,7 @@ Tile {
 
 		Text {
 			id: lblSensor2
-			text: JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name']
+			text: app.homeAssistantSensor2 ? JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name'] : ""
 			color: colors.clockTileColor
 			height: 20
 			width: tileGrid.width - 40
@@ -126,7 +126,7 @@ Tile {
 
 		Text {
 			id: valueSensor2
-			text: JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state']
+			text: app.homeAssistantSensor2 ? (JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state']) : ""
 			color: colors.clockTileColor
 			height: 20
 			width: 40
@@ -141,7 +141,7 @@ Tile {
 
 		Text {
 			id: lblSensor3
-			text: JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name']
+			text: app.homeAssistantSensor3 ? JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name'] : ""
 			color: colors.clockTileColor
 			height: 20
 			width: tileGrid.width - 40
@@ -156,7 +156,7 @@ Tile {
 
 		Text {
 			id: valueSensor3
-			text: JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor3Info)['state'] + " " + JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor3Info)['state']
+			text: app.homeAssistantSensor3 ? (JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor3Info)['state'] + " " + JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor3Info)['state']) : ""
 			color: colors.clockTileColor
 			height: 20
 			width: 40
