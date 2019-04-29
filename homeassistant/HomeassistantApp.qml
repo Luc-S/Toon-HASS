@@ -661,33 +661,32 @@ App {
 
     function getHomeAssistant(entity, callback) {
         if (entity == "") {
-            callback("");
-            return;
-        }
+            return false;
+        } else {
+            var http = new XMLHttpRequest();
+            var fullUrl = "";
+            var urlExtension = entity ? "/api/states/" + entity : "/api/states";
 
-        var http = new XMLHttpRequest();
-        var fullUrl = "";
-        var urlExtension = entity ? "/api/states/" + entity : "/api/states";
-
-        http.onreadystatechange = function() {
-            if (http.readyState == 4) {
-                if (http.status == 200) {
-                    callback(http.responseText);
-                } else {
-                    callback(http.status);
+            http.onreadystatechange = function() {
+                if (http.readyState == 4) {
+                    if (http.status == 200) {
+                        callback(http.responseText);
+                    } else {
+                        callback(http.status);
+                    }
                 }
             }
+
+            fullUrl = url + urlExtension;
+
+            //Only send password is there is one given
+            if (homeAssistantPass) {
+                fullUrl = fullUrl + urlPass;
+            }
+
+            http.open("GET", fullUrl, true);
+            http.send();
         }
-
-        fullUrl = url + urlExtension;
-
-        //Only send password is there is one given
-        if (homeAssistantPass) {
-            fullUrl = fullUrl + urlPass;
-        }
-
-        http.open("GET", fullUrl, true);
-        http.send();
     }
     
     function setHomeAssistant(entity, state) {
