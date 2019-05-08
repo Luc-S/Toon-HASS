@@ -12,6 +12,8 @@ Screen {
         app.getSwitchInfo();
         app.getSliderInfo();
         app.getAlarmInfo();
+
+        logRect.visible = false;
         
         if (app.homeAssistantSensor1) {
             homeAssistantSensor1Name.visible = true;
@@ -177,16 +179,39 @@ Screen {
 
     hasBackButton : true
 
-    Text {
-        id: title
-        x: 30
-        y: 0
-        width: 740
-        text: app.message
-        font.pixelSize: 10
-        font.family: qfont.semiBold.name
-        color: "red"
-        wrapMode: Text.WordWrap
+    property alias logR: logRect
+
+    Rectangle {
+        id: logRect
+        z: 100
+        x: 100
+        y: 50
+        width: 600
+        height: 300
+        radius: 10
+        border.color: "#9e9e9e"
+        border.width: 1
+        color: "#f5f5f5"
+
+        Text {
+            id: logText
+            x: 30
+            y: 10
+            width: 540
+            text: app.message
+            font.pixelSize: 10
+            font.family: qfont.semiBold.name
+            color: "#212121"
+            wrapMode: Text.WordWrap
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                logRect.visible = false;
+                app.message = "";
+            }
+        }
     }
 
     //Top section
@@ -232,7 +257,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor1Name
-                text: app.homeAssistantSensor1 ? JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -243,7 +268,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor2Name
-                text: app.homeAssistantSensor2 ? JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -254,7 +279,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor3Name
-                text: app.homeAssistantSensor3 ? JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -265,7 +290,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor4Name
-                text: app.homeAssistantSensor4 ? JSON.parse(app.homeAssistantSensor4Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor4Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -286,7 +311,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor1Value;
-                text: app.homeAssistantSensor1 ? (JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor1Info)['state']) : ""
+                text: try { (JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor1Info)['state'] } catch(e) { "" } }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -299,7 +324,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor2Value;
-                text: app.homeAssistantSensor2 ? (JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor2Info)['state']) : ""
+                text: try { (JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor2Info)['state'] } catch(e) { "" } }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap 
@@ -311,7 +336,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor3Value;
-                text: JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor3Info)['state'] + " " + JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor3Info)['state'] 
+                text: try { (JSON.parse(app.homeAssistantSensor3Info)['state'] + " " + JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor3Info)['state'] } catch(e) { "" } } 
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -323,7 +348,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor4Value;
-                text: JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor4Info)['state'] + " " + JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor4Info)['state']
+                text: try { (JSON.parse(app.homeAssistantSensor4Info)['state'] + " " + JSON.parse(app.homeAssistantSensor4Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor4Info)['state'] } catch(e) { "" } }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -347,7 +372,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor5Name
-                text: app.homeAssistantSensor5 ? JSON.parse(app.homeAssistantSensor5Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor5Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -358,7 +383,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor6Name
-                text: app.homeAssistantSensor6 ? JSON.parse(app.homeAssistantSensor6Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor6Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -369,7 +394,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor7Name
-                text: app.homeAssistantSensor7 ? JSON.parse(app.homeAssistantSensor7Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor7Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -380,7 +405,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor8Name
-                text: app.homeAssistantSensor8 ? JSON.parse(app.homeAssistantSensor8Info)['attributes']['friendly_name'] : ""
+                text: try { JSON.parse(app.homeAssistantSensor8Info)['attributes']['friendly_name'] } catch(e) { "" }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -401,7 +426,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor5Value;
-                text: JSON.parse(app.homeAssistantSensor5Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor5Info)['state'] + " " + JSON.parse(app.homeAssistantSensor5Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor5Info)['state'] 
+                text: try { (JSON.parse(app.homeAssistantSensor5Info)['state'] + " " + JSON.parse(app.homeAssistantSensor5Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor5Info)['state'] } catch(e) { "" } }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -414,7 +439,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor6Value;
-                text: JSON.parse(app.homeAssistantSensor6Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor6Info)['state'] + " " + JSON.parse(app.homeAssistantSensor6Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor6Info)['state'] 
+                text: try { (JSON.parse(app.homeAssistantSensor6Info)['state'] + " " + JSON.parse(app.homeAssistantSensor6Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor6Info)['state'] } catch(e) { "" } }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap 
@@ -426,7 +451,7 @@ Screen {
 
             Text {
                 id: homeAssistantSensor7Value;
-                text: JSON.parse(app.homeAssistantSensor7Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor7Info)['state'] + " " + JSON.parse(app.homeAssistantSensor7Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor7Info)['state'] 
+                text: try { (JSON.parse(app.homeAssistantSensor7Info)['state'] + " " + JSON.parse(app.homeAssistantSensor7Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor7Info)['state'] } catch(e) { "" } }
                 font.pixelSize: 12
                 color: "Black" 
                 wrapMode: Text.WordWrap
@@ -438,14 +463,14 @@ Screen {
 
             Text {
                 id: homeAssistantSensor8Value;
+                text: try { (JSON.parse(app.homeAssistantSensor8Info)['state'] + " " + JSON.parse(app.homeAssistantSensor8Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor8Info)['state'] } catch(e) { "" } } 
+                font.pixelSize: 12
+                color: "Black"
+                wrapMode: Text.WordWrap
                 anchors {
                         top: homeAssistantSensor7Value.bottom
                         right: homeAssistantSensor7Value.right
                 }
-                text: JSON.parse(app.homeAssistantSensor8Info)['attributes']['unit_of_measurement'] ? JSON.parse(app.homeAssistantSensor8Info)['state'] + " " + JSON.parse(app.homeAssistantSensor8Info)['attributes']['unit_of_measurement'] : JSON.parse(app.homeAssistantSensor8Info)['state'] 
-                font.pixelSize: 12
-                color: "Black"
-                wrapMode: Text.WordWrap
             }
         }
     }
@@ -478,7 +503,7 @@ Screen {
             id: homeAssistantScene1Button
             width: 120
             height: 75
-            text: JSON.parse(app.homeAssistantScene1Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantScene1Info)['attributes']['friendly_name'] } catch(e) { "" }
             anchors {
                 left: parent.left
                 top: parent.top
@@ -494,7 +519,7 @@ Screen {
             id: homeAssistantScene2Button
             width: 120
             height: 75
-            text: JSON.parse(app.homeAssistantScene2Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantScene2Info)['attributes']['friendly_name'] } catch(e) { "" }
 
             anchors {
                 left: homeAssistantScene1Button.left
@@ -512,7 +537,7 @@ Screen {
             id: homeAssistantScene3Button
             width: 120
             height: 75
-            text: JSON.parse(app.homeAssistantScene3Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantScene3Info)['attributes']['friendly_name'] } catch(e) { "" }
 
             anchors {
                 left: homeAssistantScene1Button.right
@@ -530,7 +555,7 @@ Screen {
             id: homeAssistantScene4Button
             width: 120
             height: 75
-            text: JSON.parse(app.homeAssistantScene4Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantScene4Info)['attributes']['friendly_name'] } catch(e) { "" }
  
             anchors {
                 left: homeAssistantScene3Button.left
@@ -563,7 +588,7 @@ Screen {
             id: sliderTitle
             width: 245
             height: 27
-            text: JSON.parse(app.homeAssistantSlider1Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantSlider1Info)['attributes']['friendly_name'] } catch(e) { "" }
             font.pixelSize: 16
             font.family: qfont.semiBold.name
             color: "Black"
@@ -624,13 +649,17 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            parent.source = "./drawables/selected.png"
-                            homeAssistantSlider2Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider3Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider4Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider5Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider6Selection.source = "./drawables/notselected.png"
-                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption1Label.text);
+                            if (app.connected) {
+                                parent.source = "./drawables/selected.png"
+                                homeAssistantSlider2Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider3Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider4Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider5Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider6Selection.source = "./drawables/notselected.png"
+                                app.setHomeAssistant(app.homeAssistantSlider1, sliderOption1Label.text);
+                            } else {
+                                app.logText("Unable to send command. Please verify connection settings.");
+                            }
                         }
                     }
                 }
@@ -687,13 +716,17 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            parent.source = "./drawables/selected.png"
-                            homeAssistantSlider1Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider3Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider4Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider5Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider6Selection.source = "./drawables/notselected.png"
-                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption2Label.text);
+                            if (app.connected) {
+                                parent.source = "./drawables/selected.png"
+                                homeAssistantSlider1Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider3Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider4Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider5Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider6Selection.source = "./drawables/notselected.png"
+                                app.setHomeAssistant(app.homeAssistantSlider1, sliderOption2Label.text);
+                            } else {
+                                app.logText("Unable to send command. Please verify connection settings.");
+                            }
                         }
                     }
                 }
@@ -750,13 +783,17 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            parent.source = "./drawables/selected.png"
-                            homeAssistantSlider1Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider2Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider4Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider5Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider6Selection.source = "./drawables/notselected.png"
-                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption3Label.text);
+                            if (app.connected) {
+                                parent.source = "./drawables/selected.png"
+                                homeAssistantSlider1Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider2Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider4Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider5Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider6Selection.source = "./drawables/notselected.png"
+                                app.setHomeAssistant(app.homeAssistantSlider1, sliderOption3Label.text);
+                            } else {
+                                app.logText("Unable to send command. Please verify connection settings.");
+                            }
                         }
                     }
                 }
@@ -813,13 +850,17 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            parent.source = "./drawables/selected.png"
-                            homeAssistantSlider1Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider2Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider3Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider5Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider6Selection.source = "./drawables/notselected.png"
-                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption4Label.text);
+                            if (app.connected) {
+                                parent.source = "./drawables/selected.png"
+                                homeAssistantSlider1Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider2Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider3Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider5Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider6Selection.source = "./drawables/notselected.png"
+                                app.setHomeAssistant(app.homeAssistantSlider1, sliderOption4Label.text);
+                            } else {
+                                app.logText("Unable to send command. Please verify connection settings.");
+                            }
                         }
                     }
                 }
@@ -876,13 +917,17 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            parent.source = "./drawables/selected.png"
-                            homeAssistantSlider1Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider2Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider3Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider4Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider6Selection.source = "./drawables/notselected.png"
-                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption5Label.text);
+                            if (app.connected) {
+                                parent.source = "./drawables/selected.png"
+                                homeAssistantSlider1Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider2Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider3Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider4Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider6Selection.source = "./drawables/notselected.png"
+                                app.setHomeAssistant(app.homeAssistantSlider1, sliderOption5Label.text);
+                            } else {
+                                app.logText("Unable to send command. Please verify connection settings.");
+                            }
                         }
                     }
                 }
@@ -939,13 +984,17 @@ Screen {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            parent.source = "./drawables/selected.png"
-                            homeAssistantSlider1Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider2Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider3Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider4Selection.source = "./drawables/notselected.png"
-                            homeAssistantSlider5Selection.source = "./drawables/notselected.png"
-                            app.setHomeAssistant(app.homeAssistantSlider1, sliderOption6Label.text);
+                            if (app.connected) {
+                                parent.source = "./drawables/selected.png"
+                                homeAssistantSlider1Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider2Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider3Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider4Selection.source = "./drawables/notselected.png"
+                                homeAssistantSlider5Selection.source = "./drawables/notselected.png"
+                                app.setHomeAssistant(app.homeAssistantSlider1, sliderOption6Label.text);
+                            } else {
+                                app.logText("Unable to send command. Please verify connection settings.");
+                            }
                         }
                     }
                 }
@@ -994,7 +1043,7 @@ Screen {
         Text {
             id: homeAssistantSwitch1Name
             width: 200
-            text: JSON.parse(app.homeAssistantSwitch1Info)['attributes']['friendly_name'] 
+            text: try { JSON.parse(app.homeAssistantSwitch1Info)['attributes']['friendly_name'] } catch(e) { "" }
             font.pixelSize: 12
             color: "Black" 
             wrapMode: Text.WordWrap
@@ -1027,14 +1076,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch1.state == "on") {
-                            parent.source = "./drawables/backgroundOff.png"
-                            knob.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch1, 0);
+                        if (app.connected) {
+                            if (toggleSwitch1.state == "on") {
+                                parent.source = "./drawables/backgroundOff.png"
+                                knob.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch1, 0);
+                            } else {
+                                parent.source = "./drawables/backgroundOn.png"
+                                knob.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch1, 1);
+                            }
                         } else {
-                            parent.source = "./drawables/backgroundOn.png"
-                            knob.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch1, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1050,14 +1103,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch1.state == "on") {
-                            homeAssistantSwitch1Button.source = "./drawables/backgroundOff.png"
-                            parent.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch1, 0);
+                        if (app.connected) {
+                            if (toggleSwitch1.state == "on") {
+                                homeAssistantSwitch1Button.source = "./drawables/backgroundOff.png"
+                                parent.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch1, 0);
+                            } else {
+                                homeAssistantSwitch1Button.source = "./drawables/backgroundOn.png"
+                                parent.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch1, 1);
+                            }
                         } else {
-                            homeAssistantSwitch1Button.source = "./drawables/backgroundOn.png"
-                            parent.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch1, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1068,13 +1125,13 @@ Screen {
                     name: "on"
                     PropertyChanges { target: knob; x: 22 }
                     PropertyChanges { target: homeAssistantSwitch1Button; source: "./drawables/backgroundOn.png" }
-                    PropertyChanges { target: toggleswitch1; on: true }
+                    PropertyChanges { target: toggleSwitch1; on: true }
                 },
                 State {
                     name: "off"
                     PropertyChanges { target: knob; x: 1 }
                     PropertyChanges { target: homeAssistantSwitch1Button; source: "./drawables/backgroundOff.png" }
-                    PropertyChanges { target: toggleswitch1; on: false }
+                    PropertyChanges { target: toggleSwitch1; on: false }
                 }
             ]
         }
@@ -1092,7 +1149,7 @@ Screen {
         Text {
             id: homeAssistantSwitch2Name
             width: 200
-            text: JSON.parse(app.homeAssistantSwitch2Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantSwitch2Info)['attributes']['friendly_name'] } catch(e) { "" }
             font.pixelSize: 12
             color: "Black" 
             wrapMode: Text.WordWrap
@@ -1125,14 +1182,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch2.state == "on") {
-                            parent.source = "./drawables/backgroundOff.png"
-                            knob2.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch2, 0);
+                        if (app.connected) {
+                            if (toggleSwitch2.state == "on") {
+                                parent.source = "./drawables/backgroundOff.png"
+                                knob2.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch2, 0);
+                            } else {
+                                parent.source = "./drawables/backgroundOn.png"
+                                knob2.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch2, 1);
+                            }
                         } else {
-                            parent.source = "./drawables/backgroundOn.png"
-                            knob2.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch2, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1148,14 +1209,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch2.state == "on") {
-                            homeAssistantSwitch2Button.source = "./drawables/backgroundOff.png"
-                            parent.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch2, 0);
+                        if (app.connected) {
+                            if (toggleSwitch2.state == "on") {
+                                homeAssistantSwitch2Button.source = "./drawables/backgroundOff.png"
+                                parent.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch2, 0);
+                            } else {
+                                homeAssistantSwitch2Button.source = "./drawables/backgroundOn.png"
+                                parent.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch2, 1);
+                            }
                         } else {
-                            homeAssistantSwitch2Button.source = "./drawables/backgroundOn.png"
-                            parent.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch2, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1166,13 +1231,13 @@ Screen {
                     name: "on"
                     PropertyChanges { target: knob2; x: 22 }
                     PropertyChanges { target: homeAssistantSwitch2Button; source: "./drawables/backgroundOn.png" }
-                    PropertyChanges { target: toggleswitch2; on: true }
+                    PropertyChanges { target: toggleSwitch2; on: true }
                 },
                 State {
                     name: "off"
                     PropertyChanges { target: knob2; x: 1 }
                     PropertyChanges { target: homeAssistantSwitch2Button; source: "./drawables/backgroundOff.png" }
-                    PropertyChanges { target: toggleswitch2; on: false }
+                    PropertyChanges { target: toggleSwitch2; on: false }
                 }
             ]
         }
@@ -1190,7 +1255,7 @@ Screen {
         Text {
             id: homeAssistantSwitch3Name
             width: 200
-            text: JSON.parse(app.homeAssistantSwitch3Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantSwitch3Info)['attributes']['friendly_name'] } catch(e) { "" }
             font.pixelSize: 12
             color: "Black" 
             wrapMode: Text.WordWrap
@@ -1223,14 +1288,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch3.state == "on") {
-                            parent.source = "./drawables/backgroundOff.png"
-                            knob3.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch3, 0);
+                        if (app.connected) {
+                            if (toggleSwitch3.state == "on") {
+                                parent.source = "./drawables/backgroundOff.png"
+                                knob3.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch3, 0);
+                            } else {
+                                parent.source = "./drawables/backgroundOn.png"
+                                knob3.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch3, 1);
+                            }
                         } else {
-                            parent.source = "./drawables/backgroundOn.png"
-                            knob3.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch3, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1246,14 +1315,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch3.state == "on") {
-                            homeAssistantSwitch3Button.source = "./drawables/backgroundOff.png"
-                            parent.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch3, 0);
+                        if (app.connected) {
+                            if (toggleSwitch3.state == "on") {
+                                homeAssistantSwitch3Button.source = "./drawables/backgroundOff.png"
+                                parent.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch3, 0);
+                            } else {
+                                homeAssistantSwitch3Button.source = "./drawables/backgroundOn.png"
+                                parent.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch3, 1);
+                            }
                         } else {
-                            homeAssistantSwitch3Button.source = "./drawables/backgroundOn.png"
-                            parent.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch3, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1264,13 +1337,13 @@ Screen {
                     name: "on"
                     PropertyChanges { target: knob3; x: 22 }
                     PropertyChanges { target: homeAssistantSwitch3Button; source: "./drawables/backgroundOn.png" }
-                    PropertyChanges { target: toggleswitch3; on: true }
+                    PropertyChanges { target: toggleSwitch3; on: true }
                 },
                 State {
                     name: "off"
                     PropertyChanges { target: knob3; x: 1 }
                     PropertyChanges { target: homeAssistantSwitch3Button; source: "./drawables/backgroundOff.png" }
-                    PropertyChanges { target: toggleswitch3; on: false }
+                    PropertyChanges { target: toggleSwitch3; on: false }
                 }
             ]
         }
@@ -1288,7 +1361,7 @@ Screen {
         Text {
             id: homeAssistantSwitch4Name
             width: 200
-            text: JSON.parse(app.homeAssistantSwitch4Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantSwitch4Info)['attributes']['friendly_name'] } catch(e) { "" }
             font.pixelSize: 12
             color: "Black" 
             wrapMode: Text.WordWrap
@@ -1321,14 +1394,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch4.state == "on") {
-                            parent.source = "./drawables/backgroundOff.png"
-                            knob4.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch4, 0);
+                        if (app.connected) {
+                            if (toggleSwitch4.state == "on") {
+                                parent.source = "./drawables/backgroundOff.png"
+                                knob4.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch4, 0);
+                            } else {
+                                parent.source = "./drawables/backgroundOn.png"
+                                knob4.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch4, 1);
+                            }
                         } else {
-                            parent.source = "./drawables/backgroundOn.png"
-                            knob4.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch4, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1344,14 +1421,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch4.state == "on") {
-                            homeAssistantSwitch4Button.source = "./drawables/backgroundOff.png"
-                            parent.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch4, 0);
+                        if (app.connected) {
+                            if (toggleSwitch4.state == "on") {
+                                homeAssistantSwitch4Button.source = "./drawables/backgroundOff.png"
+                                parent.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch4, 0);
+                            } else {
+                                homeAssistantSwitch4Button.source = "./drawables/backgroundOn.png"
+                                parent.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch4, 1);
+                            }
                         } else {
-                            homeAssistantSwitch4Button.source = "./drawables/backgroundOn.png"
-                            parent.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch4, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1362,13 +1443,13 @@ Screen {
                     name: "on"
                     PropertyChanges { target: knob4; x: 22 }
                     PropertyChanges { target: homeAssistantSwitch4Button; source: "./drawables/backgroundOn.png" }
-                    PropertyChanges { target: toggleswitch4; on: true }
+                    PropertyChanges { target: toggleSwitch4; on: true }
                 },
                 State {
                     name: "off"
                     PropertyChanges { target: knob4; x: 1 }
                     PropertyChanges { target: homeAssistantSwitch4Button; source: "./drawables/backgroundOff.png" }
-                    PropertyChanges { target: toggleswitch4; on: false }
+                    PropertyChanges { target: toggleSwitch4; on: false }
                 }
             ]
         }
@@ -1386,7 +1467,7 @@ Screen {
         Text {
             id: homeAssistantSwitch5Name
             width: 200
-            text: JSON.parse(app.homeAssistantSwitch5Info)['attributes']['friendly_name']
+            text: try { JSON.parse(app.homeAssistantSwitch5Info)['attributes']['friendly_name'] } catch(e) { "" }
             font.pixelSize: 12
             color: "Black" 
             wrapMode: Text.WordWrap
@@ -1419,14 +1500,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch5.state == "on") {
-                            parent.source = "./drawables/backgroundOff.png"
-                            knob5.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch5, 0);
+                        if (app.connected) {
+                            if (toggleSwitch5.state == "on") {
+                                parent.source = "./drawables/backgroundOff.png"
+                                knob5.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch5, 0);
+                            } else {
+                                parent.source = "./drawables/backgroundOn.png"
+                                knob5.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch5, 1);
+                            }
                         } else {
-                            parent.source = "./drawables/backgroundOn.png"
-                            knob5.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch5, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1442,14 +1527,18 @@ Screen {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (toggleSwitch5.state == "on") {
-                            homeAssistantSwitch5Button.source = "./drawables/backgroundOff.png"
-                            parent.x = 1;
-                            app.setHomeAssistant(app.homeAssistantSwitch5, 0);
+                        if (app.connected) {
+                            if (toggleSwitch5.state == "on") {
+                                homeAssistantSwitch5Button.source = "./drawables/backgroundOff.png"
+                                parent.x = 1;
+                                app.setHomeAssistant(app.homeAssistantSwitch5, 0);
+                            } else {
+                                homeAssistantSwitch5Button.source = "./drawables/backgroundOn.png"
+                                parent.x = 22;
+                                app.setHomeAssistant(app.homeAssistantSwitch5, 1);
+                            }
                         } else {
-                            homeAssistantSwitch5Button.source = "./drawables/backgroundOn.png"
-                            parent.x = 22;
-                            app.setHomeAssistant(app.homeAssistantSwitch5, 1);
+                            app.logText("Unable to send command. Please verify connection settings.");
                         }
                     }
                 }
@@ -1460,13 +1549,13 @@ Screen {
                     name: "on"
                     PropertyChanges { target: knob5; x: 22 }
                     PropertyChanges { target: homeAssistantSwitch5Button; source: "./drawables/backgroundOn.png" }
-                    PropertyChanges { target: toggleswitch5; on: true }
+                    PropertyChanges { target: toggleSwitch5; on: true }
                 },
                 State {
                     name: "off"
                     PropertyChanges { target: knob5; x: 1 }
                     PropertyChanges { target: homeAssistantSwitch5Button; source: "./drawables/backgroundOff.png" }
-                    PropertyChanges { target: toggleswitch5; on: false }
+                    PropertyChanges { target: toggleSwitch5; on: false }
                 }
             ]
         }
@@ -2002,12 +2091,16 @@ Screen {
                 onClicked: {
                     app.homeAssistantAlarmCodeLabel = "****";
 
-                    if (app.homeAssistantAlarmCode.length > 0 && alarmRectEnter.state == "on") {
-                        alarmRectEnterButton.source = "./drawables/dialpadUnlocked.png"
-                        app.setHomeAssistant(app.homeAssistantAlarm1, 0);
+                    if (app.connected) {
+                        if (app.homeAssistantAlarmCode.length > 0 && alarmRectEnter.state == "on") {
+                            alarmRectEnterButton.source = "./drawables/dialpadUnlocked.png"
+                            app.setHomeAssistant(app.homeAssistantAlarm1, 0);
+                        } else {
+                            alarmRectEnterButton.source = "./drawables/dialpadLocked.png"
+                            app.setHomeAssistant(app.homeAssistantAlarm1, 1);
+                        }
                     } else {
-                        alarmRectEnterButton.source = "./drawables/dialpadLocked.png"
-                        app.setHomeAssistant(app.homeAssistantAlarm1, 1);
+                        app.logText("Unable to send command. Please verify connection settings.");
                     }
                 }
             }
@@ -2027,4 +2120,3 @@ Screen {
         }
     }
 }
-

@@ -346,6 +346,54 @@ Screen {
                 qkeyboard.open("Voer het wachtwoord voor Home Assistant in", homeAssistantPassLabel.inputText, saveHomeAssistantPass)
             }
         }
+
+        Rectangle {
+            id: legacyRect
+            width: 200
+            height: 35
+            color: "transparent"
+            anchors {
+                top: homeAssistantPassLabel.top
+                left: homeAssistantPassLabel.right
+            }
+
+            Text {
+                id: legacyLabel
+                width: 150
+                text: "Legacy pass"
+                font.pixelSize: 12
+                color: "Black" 
+                wrapMode: Text.WordWrap
+                anchors {
+                    left: parent.left
+                    verticalCenter: parent.verticalCenter
+                    leftMargin: 20
+                }
+            }
+
+            Image {
+                id: legacyButton
+                width: 50
+                height: 35
+                source: app.homeAssistantLegacy ? app.imgButtonOn : app.imgButtonOff
+                smooth: true
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (app.homeAssistantLegacy) {
+                            app.homeAssistantLegacy = 0;
+                        } else {
+                            app.homeAssistantLegacy = 1;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
