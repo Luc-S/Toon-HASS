@@ -510,28 +510,49 @@ App {
     function getSwitchInfo() {
         if (connected) {
             getHomeAssistant(homeAssistantSwitch1, function(data) {
-                homeAssistantSwitch1Info = data;
-                homeAssistantScreen.switch1R.switch1.state = JSON.parse(homeAssistantSwitch1Info)['state'];
+                if (data) {
+                    homeAssistantSwitch1Info = data;
+                    homeAssistantScreen.switch1R.switch1.state = JSON.parse(homeAssistantSwitch1Info)['state'];
+                } else {
+                    homeAssistantSwitch1Info = "";
+                }
             });
 
             getHomeAssistant(homeAssistantSwitch2, function(data) {
-                homeAssistantSwitch2Info = data;
-                homeAssistantScreen.switch2R.switch2.state = JSON.parse(homeAssistantSwitch2Info)['state'];
+                if (data) {
+                    homeAssistantSwitch2Info = data;
+                    homeAssistantScreen.switch2R.switch2.state = JSON.parse(homeAssistantSwitch2Info)['state'];
+                } else {
+                    homeAssistantSwitch2Info = "";
+                }
+                
             });
 
             getHomeAssistant(homeAssistantSwitch3, function(data) {
-                homeAssistantSwitch3Info = data;
-                homeAssistantScreen.switch3R.switch3.state = JSON.parse(homeAssistantSwitch3Info)['state'];
+                if (data) {
+                    homeAssistantSwitch3Info = data;
+                    homeAssistantScreen.switch3R.switch3.state = JSON.parse(homeAssistantSwitch3Info)['state'];
+                } else {
+                    homeAssistantSwitch3Info = "";
+                }
             });
 
             getHomeAssistant(homeAssistantSwitch4, function(data) {
-                homeAssistantSwitch4Info = data;
-                homeAssistantScreen.switch4R.switch4.state = JSON.parse(homeAssistantSwitch4Info)['state'];
+                if (data) {
+                    homeAssistantSwitch4Info = data;
+                    homeAssistantScreen.switch4R.switch4.state = JSON.parse(homeAssistantSwitch4Info)['state'];
+                } else {
+                    homeAssistantSwitch4Info = "";
+                }
             });
 
             getHomeAssistant(homeAssistantSwitch5, function(data) {
-                homeAssistantSwitch5Info = data;
-                homeAssistantScreen.switch5R.switch5.state = JSON.parse(homeAssistantSwitch5Info)['state'];
+                if (data) {
+                    homeAssistantSwitch5Info = data;
+                    homeAssistantScreen.switch5R.switch5.state = JSON.parse(homeAssistantSwitch5Info)['state'];
+                } else {
+                    homeAssistantSwitch5Info = "";
+                }
             });
         }
     }
@@ -718,7 +739,7 @@ App {
 
     function getHomeAssistant(entity, callback) {
         if (entity == "") {
-            callback("");
+            callback(0);
         } else {
             var http = new XMLHttpRequest();
             var fullUrl = "";
