@@ -341,37 +341,53 @@ App {
     //Retrieve sensor information from Home Assistant
     function getSensorInfo() {
         if (connected) {
-            getHomeAssistant(homeAssistantSensor1, function(data) {
-                homeAssistantSensor1Info = data;
-            });
+            if (homeAssistantSensor1) {
+                getHomeAssistant(homeAssistantSensor1, function(data) {
+                    homeAssistantSensor1Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor2, function(data) {
-                homeAssistantSensor2Info = data;
-            });
+            if (homeAssistantSensor2) {
+                getHomeAssistant(homeAssistantSensor2, function(data) {
+                    homeAssistantSensor2Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor3, function(data) {
-                homeAssistantSensor3Info = data;
-            });
+            if (homeAssistantSensor3) {
+                getHomeAssistant(homeAssistantSensor3, function(data) {
+                    homeAssistantSensor3Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor4, function(data) {
-                homeAssistantSensor4Info = data;
-            });
+            if (homeAssistantSensor4) {
+                getHomeAssistant(homeAssistantSensor4, function(data) {
+                    homeAssistantSensor4Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor5, function(data) {
-                homeAssistantSensor5Info = data;
-            });
+            if (homeAssistantSensor5) {
+                getHomeAssistant(homeAssistantSensor5, function(data) {
+                    homeAssistantSensor5Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor6, function(data) {
-                homeAssistantSensor6Info = data;
-            });
+            if (homeAssistantSensor6) {
+                getHomeAssistant(homeAssistantSensor6, function(data) {
+                    homeAssistantSensor6Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor7, function(data) {
-                homeAssistantSensor7Info = data;
-            });
+            if (homeAssistantSensor7) {
+                getHomeAssistant(homeAssistantSensor7, function(data) {
+                    homeAssistantSensor7Info = data;
+                });
+            }
 
-            getHomeAssistant(homeAssistantSensor8, function(data) {
-                homeAssistantSensor8Info = data;
-            });
+            if (homeAssistantSensor8) {
+                getHomeAssistant(homeAssistantSensor8, function(data) {
+                    homeAssistantSensor8Info = data;
+                });
+            }
         }
     }
 
@@ -425,8 +441,10 @@ App {
     function getSliderInfo() {
         if (connected) {
             getHomeAssistant(homeAssistantSlider1, function(data) {
-                homeAssistantSlider1Info = data;
-                buildSliderObject();
+                if (data) {
+                    homeAssistantSlider1Info = data;
+                    buildSliderObject();
+                }
             });
         }
     }
@@ -573,18 +591,20 @@ App {
     function getAlarmInfo() {
         if (connected) {
             getHomeAssistant(homeAssistantAlarm1, function(data) {
-                homeAssistantAlarmState = JSON.parse(data)['state'];
+                if (data) {
+                    homeAssistantAlarmState = JSON.parse(data)['state'];
 
-                if (homeAssistantAlarmState == "disarmed") {
-                    homeAssistantScreen.alarmR.alarmREnter.state = "off";
-                } else {
-                    homeAssistantScreen.alarmR.alarmREnter.state = "on";
-                }
+                    if (homeAssistantAlarmState == "disarmed") {
+                        homeAssistantScreen.alarmR.alarmREnter.state = "off";
+                    } else {
+                        homeAssistantScreen.alarmR.alarmREnter.state = "on";
+                    }
 
-                //Don't update alarmcode label when code is being entered
-                var alarmLastChar = homeAssistantAlarmCodeLabel.slice(-1);
-                if (!(/\d/.test(alarmLastChar))) {
-                    homeAssistantAlarmCodeLabel = homeAssistantAlarmState;
+                    //Don't update alarmcode label when code is being entered
+                    var alarmLastChar = homeAssistantAlarmCodeLabel.slice(-1);
+                    if (!(/\d/.test(alarmLastChar))) {
+                        homeAssistantAlarmCodeLabel = homeAssistantAlarmState;
+                    }
                 }
             });
         }
@@ -798,7 +818,8 @@ App {
                 fullUrl = state ? url + "/api/services/alarm_control_panel/alarm_arm_away" : url + "/api/services/alarm_control_panel/alarm_disarm";
                 break;
             default:
-                pass
+                logText("Unable to work with object type: " + type + ".");
+                return false;
         }
 
         http.onreadystatechange = function() {
