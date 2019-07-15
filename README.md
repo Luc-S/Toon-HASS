@@ -2,7 +2,7 @@
 
 This application is built to integrate some Home Assistant functionalities in Toon thermostat (available in The Netherlands). A rooted Toon is required to be able to use this application. 
 
-If you use SSL and Home Assistant version 0.73.0 or higher make sure to set 'ssl_profile: intermediate' in your Home Assistants configuration.yaml (in the http section; https://www.home-assistant.io/components/http/).
+If you use SSL and Home Assistant version 0.73.0 or higher make sure to set 'ssl_profile: intermediate' in your Home Assistants configuration.yaml (in the http section; https://www.home-assistant.io/components/http/). *This is not needed when using the Long-Lived Access token authentication.*
 
 My main goal was to enable some key features on the Toon thermostat so i didn't need a second screen on the wall. For extended details about my home automation I will grab my laptop. With this idea in mind I built integration for;
 - 8 sensors
