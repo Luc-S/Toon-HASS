@@ -184,6 +184,10 @@ Screen {
         homeAssistantSwitch5Label.inputText = app.homeAssistantSwitch5;
         homeAssistantAlarm1Label.inputText = app.homeAssistantAlarm1;
         homeAssistantAlarm2Label.inputText = "*****";
+
+        app.homeAssistantSSL == "yes" ? sslSwitch.state = "on" : sslSwitch.state = "off";
+        app.clockTile ? clockSwitch.state = "on" : clockSwitch.state = "off";
+        app.homeAssistantLegacy ? legacySwitch.state = "on" : legacySwitch.state = "off";
     }
 
     //Function to close the configuration form and save the textbox values to the usersettings file
@@ -195,7 +199,7 @@ Screen {
 
     hasBackButton : true
 
-    //Home Assistant connection textboxes
+    //Home Assistant connection textboxes    
     Rectangle {
         id: grid1
         x: 20
@@ -207,7 +211,7 @@ Screen {
         EditTextLabel4421 {
             id: homeAssistantServerLabel
             width: 560
-            height: 35
+            height: 36
             leftTextAvailableWidth: 250
             leftText: "Server IP:"
     
@@ -219,7 +223,7 @@ Screen {
         Rectangle {
             id: sslRect
             width: 200
-            height: 35
+            height: 36
             color: "transparent"
             anchors {
                 top: homeAssistantServerLabel.top
@@ -228,7 +232,7 @@ Screen {
 
             Text {
                 id: sslLabel
-                width: 150
+                width: 146
                 text: "SSL"
                 font.pixelSize: 12
                 color: "Black" 
@@ -240,34 +244,81 @@ Screen {
                 }
             }
 
-            Image {
-                id: sslButton
-                width: 50
-                height: 35
-                source: app.homeAssistantSSL == "yes" ? app.imgButtonOn : app.imgButtonOff
-                smooth: true
+            Item {
+                id: sslSwitch
+                width: 54
+                height: 36
                 anchors {
                     right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
+                
+                property bool on: false
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (app.homeAssistantSSL == "yes") {
-                            app.homeAssistantSSL = "no";
-                        } else {
-                            app.homeAssistantSSL = "yes";
+                Image {
+                    id: sslButton
+                    x: 0; y: 0
+                    width: 54
+                    height: 36
+                    source: "./drawables/backgroundOff.png"
+                    smooth: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (sslSwitch.state == "on") {
+                                sslSwitch.state = "off";
+                                app.homeAssistantSSL = "no";
+                            } else {
+                                sslSwitch.state = "on";
+                                app.homeAssistantSSL = "yes";
+                            }
                         }
                     }
                 }
+
+                Image {
+                    id: knob6
+                    x: 1; y: 0
+                    width: 32
+                    height: 36
+                    source: "./drawables/knob.png"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (sslSwitch.state == "on") {
+                                sslSwitch.state = "off";
+                                app.homeAssistantSSL = "no";
+                            } else {
+                                sslSwitch.state = "on";
+                                app.homeAssistantSSL = "yes";
+                            }
+                        }
+                    }
+                }
+
+                states: [
+                    State {
+                        name: "on"
+                        PropertyChanges { target: knob6; x: 22 }
+                        PropertyChanges { target: sslButton; source: "./drawables/backgroundOn.png" }
+                        PropertyChanges { target: sslSwitch; on: true }
+                    },
+                    State {
+                        name: "off"
+                        PropertyChanges { target: knob6; x: 1 }
+                        PropertyChanges { target: sslButton; source: "./drawables/backgroundOff.png" }
+                        PropertyChanges { target: sslSwitch; on: false }
+                    }
+                ]
             }
         }
 
         EditTextLabel4421 {
             id: homeAssistantPortLabel
             width: 560
-            height: 35
+            height: 36
             leftTextAvailableWidth: 250
             leftText: "Poort:"
             anchors {
@@ -285,7 +336,7 @@ Screen {
         Rectangle {
             id: clockRect
             width: 200
-            height: 35
+            height: 36
             color: "transparent"
             anchors {
                 top: homeAssistantPortLabel.top
@@ -294,7 +345,7 @@ Screen {
 
             Text {
                 id: clockLabel
-                width: 150
+                width: 146
                 text: "Clock widget"
                 font.pixelSize: 12
                 color: "Black" 
@@ -306,39 +357,86 @@ Screen {
                 }
             }
 
-            Image {
-                id: clockButton
-                width: 50
-                height: 35
-                source: app.clockTile ? app.imgButtonOn : app.imgButtonOff
-                smooth: true
+            Item {
+                id: clockSwitch
+                width: 54
+                height: 36
                 anchors {
                     right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
+                
+                property bool on: false
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (app.clockTile) {
-                            app.clockTile = 0;
-                        } else {
-                            app.clockTile = 1;
+                Image {
+                    id: clockButton
+                    x: 0; y: 0
+                    width: 54
+                    height: 36
+                    source: "./drawables/backgroundOff.png"
+                    smooth: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (clockSwitch.state == "on") {
+                                clockSwitch.state = "off";
+                                app.clockTile = 0;
+                            } else {
+                                clockSwitch.state = "on";
+                                app.clockTile = 1;
+                            }
                         }
                     }
                 }
+
+                Image {
+                    id: knob7
+                    x: 1; y: 0
+                    width: 32
+                    height: 36
+                    source: "./drawables/knob.png"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (clockSwitch.state == "on") {
+                                clockSwitch.state = "off";
+                                app.clockTile = 0;
+                            } else {
+                                clockSwitch.state = "on";
+                                app.clockTile = 1;
+                            }
+                        }
+                    }
+                }
+
+                states: [
+                    State {
+                        name: "on"
+                        PropertyChanges { target: knob7; x: 22 }
+                        PropertyChanges { target: clockButton; source: "./drawables/backgroundOn.png" }
+                        PropertyChanges { target: clockSwitch; on: true }
+                    },
+                    State {
+                        name: "off"
+                        PropertyChanges { target: knob7; x: 1 }
+                        PropertyChanges { target: clockButton; source: "./drawables/backgroundOff.png" }
+                        PropertyChanges { target: clockSwitch; on: false }
+                    }
+                ]
             }
         }
 
         EditTextLabel4421 {
             id: homeAssistantPassLabel
             width: 560
-            height: 35
+            height: 36
             leftTextAvailableWidth: 250
             leftText: "Pass:"
             anchors {
                 top: homeAssistantPortLabel.bottom
-                topMargin: 16
+                topMargin: 13
             }
 
             onClicked: {
@@ -350,7 +448,7 @@ Screen {
         Rectangle {
             id: legacyRect
             width: 200
-            height: 35
+            height: 36
             color: "transparent"
             anchors {
                 top: homeAssistantPassLabel.top
@@ -359,7 +457,7 @@ Screen {
 
             Text {
                 id: legacyLabel
-                width: 150
+                width: 146
                 text: "Legacy pass"
                 font.pixelSize: 12
                 color: "Black" 
@@ -371,27 +469,74 @@ Screen {
                 }
             }
 
-            Image {
-                id: legacyButton
-                width: 50
-                height: 35
-                source: app.homeAssistantLegacy ? app.imgButtonOn : app.imgButtonOff
-                smooth: true
+            Item {
+                id: legacySwitch
+                width: 54
+                height: 36
                 anchors {
                     right: parent.right
                     verticalCenter: parent.verticalCenter
                 }
+                
+                property bool on: false
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (app.homeAssistantLegacy) {
-                            app.homeAssistantLegacy = 0;
-                        } else {
-                            app.homeAssistantLegacy = 1;
+                Image {
+                    id: legacyButton
+                    x: 0; y: 0
+                    width: 54
+                    height: 36
+                    source: "./drawables/backgroundOff.png"
+                    smooth: true
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (legacySwitch.state == "on") {
+                                legacySwitch.state = "off";
+                                app.homeAssistantLegacy = 0;
+                            } else {
+                                legacySwitch.state = "on";
+                                app.homeAssistantLegacy = 1;
+                            }
                         }
                     }
                 }
+
+                Image {
+                    id: knob8
+                    x: 1; y: 0
+                    width: 32
+                    height: 36
+                    source: "./drawables/knob.png"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            if (legacySwitch.state == "on") {
+                                legacySwitch.state = "off";
+                                app.homeAssistantLegacy = 0;
+                            } else {
+                                legacySwitch.state = "on";
+                                app.homeAssistantLegacy = 1;
+                            }
+                        }
+                    }
+                }
+
+                states: [
+                    State {
+                        name: "on"
+                        PropertyChanges { target: knob8; x: 22 }
+                        PropertyChanges { target: legacyButton; source: "./drawables/backgroundOn.png" }
+                        PropertyChanges { target: legacySwitch; on: true }
+                    },
+                    State {
+                        name: "off"
+                        PropertyChanges { target: knob8; x: 1 }
+                        PropertyChanges { target: legacyButton; source: "./drawables/backgroundOff.png" }
+                        PropertyChanges { target: legacySwitch; on: false }
+                    }
+                ]
             }
         }
     }
@@ -1125,3 +1270,4 @@ Screen {
         }
     }
 }
+

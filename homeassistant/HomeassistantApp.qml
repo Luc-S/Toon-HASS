@@ -22,9 +22,6 @@ App {
 
     property int connected : 0
 
-    property string imgButtonOff : "./drawables/button_off.png"
-    property string imgButtonOn : "./drawables/button_on.png"
-
     property string url : ""
     property string urlPass : ""
 
