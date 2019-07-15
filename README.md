@@ -32,6 +32,9 @@ How to install:
 5. When starting the app for the first time the screen will be pretty much empty, click on "Instellingen" to configure the app
 6. On the configuration page enter the Home Assistant connection info and entity_id's you want to be shown (press the left/right arrows to scroll through sensors/scenes/switches)
 
+You need to manually generate a long-lived access token from your Home Assistant system and add this token to the "token.txt" file on your Toon. This file is located at /HCBv2/qml/apps/homeassistant/. To generate a token navigate to your user profile in the Home Assistant gui and scroll down to the bottom where you see "Long-Lived Access Tokens" (and press generate). 
+If you still use a password choose 'Legacy pass' on the configuration page of the Toon app.
+
 ![alt text](https://github.com/Luc-S/Toon-HASS/blob/master/README%20images/configuration.png)
 
 7. Press "Opslaan" to save your configuration. If all is well the information will be retrieved from your Home Assistant system
