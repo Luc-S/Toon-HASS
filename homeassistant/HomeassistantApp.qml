@@ -803,6 +803,9 @@ App {
             case "switch":
                 fullUrl = state ? url + "/api/services/" + type + "/turn_on" : url + "/api/services/" + type + "/turn_off";
                 break;
+            case "light":
+                fullUrl = state ? url + "/api/services/" + type + "/turn_on" : url + "/api/services/" + type + "/turn_off";
+                break;
             case "input_boolean":
                 fullUrl = state ? url + "/api/services/" + type + "/turn_on" : url + "/api/services/" + type + "/turn_off";
                 break;
