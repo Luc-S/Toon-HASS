@@ -7,7 +7,7 @@ If you use SSL and Home Assistant version 0.73.0 or higher make sure to set 'ssl
 My main goal was to enable some key features on the Toon thermostat so i didn't need a second screen on the wall. For extended details about my home automation I will grab my laptop. With this idea in mind I built integration for;
 - 8 sensors
 - 4 scenes
-- 5 switches/input_booleans
+- 5 switches/input_booleans/lights
 - 1 input_number (max 6 options)
 - 1 custom alarm
 
