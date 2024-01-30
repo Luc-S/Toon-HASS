@@ -15,7 +15,7 @@ Tile {
 	Text {
 		id: txtTimeBig
 		text: app.timeStr
-		color: colors.clockTileColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 		anchors {
 			left: parent.left
 			leftMargin: 10
@@ -30,7 +30,7 @@ Tile {
 	Text {
 		id: txtDate
 		text: app.dateStr
-		color: colors.clockTileColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 		anchors {
 			left: txtTimeBig.left
 			top: txtTimeBig.bottom
@@ -81,7 +81,7 @@ Tile {
 		Text {
 			id: lblSensor1
 			text: try { JSON.parse(app.homeAssistantSensor1Info)['attributes']['friendly_name'] } catch(e) { "" }
-			color: colors.clockTileColor
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 			height: 20
 			width: tileGrid.width - 40
 			anchors {
@@ -96,7 +96,7 @@ Tile {
 		Text {
 			id: valueSensor1
 			text: try { (JSON.parse(app.homeAssistantSensor1Info)['state'] + " " + JSON.parse(app.homeAssistantSensor1Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor1Info)['state'] } catch(e) { "" } }
-			color: colors.clockTileColor
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 			height: 20
 			width: 40
 			anchors {
@@ -112,7 +112,7 @@ Tile {
 		Text {
 			id: lblSensor2
 			text: try { JSON.parse(app.homeAssistantSensor2Info)['attributes']['friendly_name'] } catch(e) { "" }
-			color: colors.clockTileColor
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 			height: 20
 			width: tileGrid.width - 40
 			anchors {
@@ -127,7 +127,7 @@ Tile {
 		Text {
 			id: valueSensor2
 			text: try { (JSON.parse(app.homeAssistantSensor2Info)['state'] + " " + JSON.parse(app.homeAssistantSensor2Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor2Info)['state'] } catch(e) { "" } }
-			color: colors.clockTileColor
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 			height: 20
 			width: 40
 			anchors {
@@ -142,7 +142,7 @@ Tile {
 		Text {
 			id: lblSensor3
 			text: try { JSON.parse(app.homeAssistantSensor3Info)['attributes']['friendly_name'] } catch(e) { "" }
-			color: colors.clockTileColor
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 			height: 20
 			width: tileGrid.width - 40
 			anchors {
@@ -157,7 +157,7 @@ Tile {
 		Text {
 			id: valueSensor3
 			text: try { (JSON.parse(app.homeAssistantSensor3Info)['state'] + " " + JSON.parse(app.homeAssistantSensor3Info)['attributes']['unit_of_measurement']).replace("undefined", "") } catch(e) { try { JSON.parse(app.homeAssistantSensor3Info)['state'] } catch(e) { "" } }
-			color: colors.clockTileColor
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.clockTileColor : colors.clockTileColor
 			height: 20
 			width: 40
 			anchors {
