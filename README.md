@@ -12,6 +12,7 @@ This application is built to integrate some Home Assistant functionalities in To
 >
 >*An alternative rooting method, by hardware with a Raspberry Pi or USB Blaster: [ToonRooter](https://github.com/martenjacobs/ToonRooter)*
 
+<br>
 
 ### Description
 
@@ -27,6 +28,7 @@ These integrations can be used;
 
  *The HomeAssistant tile on your Toon will show the first 3 configured sensors. If you don't enter an alarm object in the tile, this space will be left empty.*
 
+<br>
 
 ## How to install
 
@@ -42,6 +44,8 @@ Type the following command at the terminal prompt, to download the HomeAssistant
 ```
 cd /HCBv2/qml/apps/ ; wget https://github.com/markbasgitaar/Toon-HASS/archive/refs/heads/master.zip ; unzip master.zip ; mv ./Toon-HASS-master/homeassistant ./ ; rm master.zip ; rm -r Toon-HASS-master ; cd
 ```
+
+<br>
 
 ## How to setup
 
@@ -74,7 +78,9 @@ Restart the GUI of the Toon using TSC Settings, or run this command by SSH to re
 ```
 killall qt-gui
 ```
-    
+
+<br>
+
 ## How to use
 
 Add the app called "homeassistant" to a new tile
