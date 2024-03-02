@@ -42,7 +42,25 @@ ssh -oHostKeyAlgorithms=+ssh-rsa root@[IP TOON]
 
 Type the following command at the terminal prompt, to download the HomeAssistant app on your Toon, and then press Enter:
 ```
-cd /HCBv2/qml/apps/ ; wget https://github.com/markbasgitaar/Toon-HASS/archive/refs/heads/master.zip ; unzip master.zip ; mv ./Toon-HASS-master/homeassistant ./ ; rm master.zip ; rm -r Toon-HASS-master ; cd
+cd /HCBv2/qml/apps/
+```
+```
+wget https://github.com/markbasgitaar/Toon-HASS/archive/refs/heads/master.zip
+```
+```
+unzip master.zip
+```
+```
+mv ./Toon-HASS-master/homeassistant ./
+```
+```
+rm master.zip
+```
+```
+rm -r Toon-HASS-master
+```
+```
+cd
 ```
 
 <br>
